@@ -23,7 +23,6 @@ public class MenuScreenState implements ScreenState, Subject {
         this.frame = frame;
         panel = new JPanel();
         panel.setLayout(new GridBagLayout());
-        panel.setBorder(BorderFactory.createLineBorder(Color.blue));
         frame.add(panel);
 
         GridBagConstraints gbc = new GridBagConstraints();

@@ -21,7 +21,6 @@ public class GameScreenState implements ScreenState, Subject {
         panel = new JPanel();
         panel.setLayout(new GridBagLayout());
         panel.setVisible(false);
-        panel.setBorder(BorderFactory.createLineBorder(Color.black));
         frame.add(panel);
 
         GridBagConstraints gbc = new GridBagConstraints();
@@ -34,10 +33,6 @@ public class GameScreenState implements ScreenState, Subject {
 
         panel.add(gamePanel, gbc);
 
-        gbc.gridy = 1;
-        JButton exitButton = new JButton("Play");
-
-        panel.add(exitButton, gbc);
 
         TileSet tileSet = new TileSet(32, 25, 18, "/tileset.png");
         // loads tiles -> no blocks
