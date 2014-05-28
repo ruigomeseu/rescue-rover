@@ -19,22 +19,29 @@ public class Hero extends MapObject implements Movable {
     public void move(int direction) {
         switch(direction) {
             case Constants.UP:
+                this.moving = true;
+                this.direction = Constants.UP;
+                sprite.setLimits(10, 15);
+                sprite.setFrameNumber(10);
                 break;
             case Constants.RIGHT:
                 this.moving = true;
                 this.direction = Constants.RIGHT;
                 sprite.setLimits(19, 24);
                 sprite.setFrameNumber(19);
-                this.offsetX += 1/(double) framesPerMovement;
                 break;
             case Constants.DOWN:
+                this.moving = true;
+                this.direction = Constants.UP;
+                sprite.setLimits(3, 8);
+                sprite.setFrameNumber(3);
                 break;
             case Constants.LEFT:
                 this.moving = true;
                 this.direction = Constants.LEFT;
-                sprite.setLimits(25, 30);
-                sprite.setFrameNumber(25);
-                this.offsetX += 1/(double) framesPerMovement;
+                sprite.setLimits(28, 33);
+                sprite.setFrameNumber(28);
+
                 break;
             default:
                 break;
@@ -52,25 +59,51 @@ public class Hero extends MapObject implements Movable {
 
         switch(direction) {
             case Constants.UP:
+                if(moving) {
+                    this.offsetY -= 1/(double) framesPerMovement;
+                } else {
+                    this.decY();
+                    this.offsetY = this.getY();
+                    sprite.setFrameNumber(9);
+                    map.tileMap.setPosition(
+                            this.getX() - Constants.VISIBLE_TILES/2,
+                            this.getY() - Constants.VISIBLE_TILES/2);
+                }
                 break;
             case Constants.RIGHT:
                 if(moving) {
                     this.offsetX += 1/(double) framesPerMovement;
                 } else {
                     this.incX();
-                    this.offsetX = Math.round(this.offsetX);
+                    this.offsetX = this.getX();
                     sprite.setFrameNumber(18);
+                    map.tileMap.setPosition(
+                            this.getX() - Constants.VISIBLE_TILES/2,
+                            this.getY() - Constants.VISIBLE_TILES/2);
                 }
                 break;
             case Constants.DOWN:
+                if(moving) {
+                    this.offsetY += 1/(double) framesPerMovement;
+                } else {
+                    this.incY();
+                    this.offsetY = this.getY();
+                    sprite.setFrameNumber(2);
+                    map.tileMap.setPosition(
+                            this.getX() - Constants.VISIBLE_TILES/2,
+                            this.getY() - Constants.VISIBLE_TILES/2);
+                }
                 break;
             case Constants.LEFT:
                 if(moving) {
                     this.offsetX -= 1/(double) framesPerMovement;
                 } else {
                     this.decX();
-                    this.offsetX = Math.round(this.offsetX);
-                    sprite.setFrameNumber(24);
+                    this.offsetX = this.getX();
+                    sprite.setFrameNumber(27);
+                    map.tileMap.setPosition(
+                            this.getX() - Constants.VISIBLE_TILES/2,
+                            this.getY() - Constants.VISIBLE_TILES/2);
                 }
                 break;
             default:

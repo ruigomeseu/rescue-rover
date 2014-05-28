@@ -54,6 +54,7 @@ public class GameScreenState implements ScreenState, Subject {
 
         Hero hero = new Hero(11, 11, Constants.UP, map);
         map.addMapObject(hero);
+        tileMap.setHero(hero);
         gamePanel.setMap(map);
 
         gamePanel.addKeyListener(new MovementKeyListener(hero));

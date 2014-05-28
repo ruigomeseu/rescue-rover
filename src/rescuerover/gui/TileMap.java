@@ -1,5 +1,6 @@
 package rescuerover.gui;
 
+import rescuerover.logic.Hero;
 import rescuerover.logic.TileSet;
 
 import java.awt.*;
@@ -25,6 +26,7 @@ public class TileMap {
 
     //dimension of each tile, in pixels
     private Dimension tileDimension;
+    private Hero hero;
 
     //how many tiles to show
     private Dimension showDimension;
@@ -95,23 +97,54 @@ public class TileMap {
         int countery = 0;
         System.out.println("Tile map drawing");
         BufferedImage tileAtPosition;
-        for (int i = x; i < x + showDimension.getWidth(); i++) {
+        for (int i = x; i <= x + showDimension.getWidth(); i++) {
             for (int j = y; j < y + showDimension.getHeight(); j++) {
                 try {
                     tileAtPosition = tileSet.getImageAtPosition(map[j][i] - 1);
                 } catch(ArrayIndexOutOfBoundsException e) {
                     tileAtPosition = new BufferedImage(32, 32, BufferedImage.TYPE_BYTE_GRAY);
                 }
-                g.drawImage(
-                        tileAtPosition,
-                        counterx * (int) tileDimension.getWidth(),
-                        countery * (int) tileDimension.getHeight(),
-                        (int) tileDimension.getWidth(),
-                        (int) tileDimension.getHeight(), null);
+
+                long offsetIntegerX = (long) hero.getX();
+                double offsetDecimalX = hero.getOffsetX() - offsetIntegerX;
+
+                if(offsetDecimalX > 0) {
+                    if(counterx == 0) {
+                        g.drawImage(
+                                tileAtPosition,
+                                counterx * (int) tileDimension.getWidth(),
+                                countery * (int) tileDimension.getHeight(),
+                                (int) Math.round(tileDimension.getWidth() - tileDimension.getWidth() * offsetDecimalX),
+                                (countery + 1) * (int) tileDimension.getHeight(),
+                                (int) Math.round(offsetDecimalX * 32),
+                                0,
+                                (int) tileAtPosition.getWidth(),
+                                (int) 32,
+                                null);
+                    } else {
+                        g.drawImage(
+                                tileAtPosition,
+                                (int) Math.round( (counterx - offsetDecimalX) * (int) tileDimension.getWidth() ),
+                                countery * (int) tileDimension.getHeight(),
+                                (int) Math.round((int) tileDimension.getWidth()),
+                                (int) tileDimension.getHeight(), null);
+                    }
+                } else {
+                    g.drawImage(
+                            tileAtPosition,
+                            counterx * (int) tileDimension.getWidth(),
+                            countery * (int) tileDimension.getHeight(),
+                            (int) Math.round((int) tileDimension.getWidth()),
+                            (int) tileDimension.getHeight(), null);
+                }
                 countery++;
             }
             counterx++;
             countery = 0;
         }
+    }
+
+    public void setHero(Hero hero) {
+        this.hero = hero;
     }
 }

@@ -24,10 +24,13 @@ public class ObjectsMap {
                 System.out.println("Obj X: " + obj.getX());
                 System.out.println("Obj offestX: " + obj.getOffsetX());
 
+                System.out.println("Obj Y: " + obj.getY());
+                System.out.println("Obj offestY: " + obj.getOffsetY());
+
                 g.drawImage(
                         obj.getSprite().getFrame(),
-                        (int) Math.round((obj.getOffsetX() - Constants.VISIBLE_TILES/2 - 1) * (int) tileDimension.getWidth()),
-                        (obj.getY() - Constants.VISIBLE_TILES/2 - 1) * (int) tileDimension.getHeight(),
+                        (int) Math.round((Constants.VISIBLE_TILES/2) * (int) tileDimension.getWidth()),
+                        (Constants.VISIBLE_TILES/2) * (int) tileDimension.getHeight(),
                         (int) tileDimension.getWidth(),
                         (int) tileDimension.getHeight(),
                         null);

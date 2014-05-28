@@ -20,7 +20,7 @@ public class GameThread extends Thread implements Runnable {
         while(hero.isAlive()) {
             gamePanel.repaint();
             try {
-                Thread.sleep(100);
+                Thread.sleep(60);
             } catch(Exception e) {
                 System.out.println("Exception at Thread Sleep: " + e);
             }
