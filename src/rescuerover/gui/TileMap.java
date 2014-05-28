@@ -111,8 +111,6 @@ public class TileMap {
                     tileAtPosition = new BufferedImage(32, 32, BufferedImage.TYPE_BYTE_GRAY);
                 }
 
-
-
                 if(offsetDecimalX > 0) {
                     if(counterx == 0) {
                         g.drawImage(
@@ -132,17 +130,18 @@ public class TileMap {
                                 (int) Math.round( (counterx - offsetDecimalX) * (int) tileDimension.getWidth() ),
                                 countery * (int) tileDimension.getHeight(),
                                 (int) Math.round((int) tileDimension.getWidth()),
-                                (int) tileDimension.getHeight(), null);
+                                (int) tileDimension.getHeight(),
+                                null);
                     }
                 } else if(offsetDecimalX < 0) {
                     if(counterx == 0) {
                         g.drawImage(
                                 tileAtPosition,
-                                0,
+                                counterx * (int) (tileDimension.getWidth() - tileDimension.getWidth()*offsetDecimalX),
                                 countery * (int) tileDimension.getHeight(),
-                                (int) Math.round(tileDimension.getWidth() + tileDimension.getWidth() * offsetDecimalX),
+                                (counterx + 1) * (int) tileDimension.getWidth(),
                                 (countery + 1) * (int) tileDimension.getHeight(),
-                                (int) Math.round(offsetDecimalX - offsetDecimalX * 32),
+                                (int) Math.round(offsetDecimalX * 32),
                                 0,
                                 (int) tileAtPosition.getWidth(),
                                 (int) 32,
@@ -153,7 +152,8 @@ public class TileMap {
                                 (int) Math.round( (counterx - offsetDecimalX) * (int) tileDimension.getWidth() ),
                                 countery * (int) tileDimension.getHeight(),
                                 (int) Math.round((int) tileDimension.getWidth()),
-                                (int) tileDimension.getHeight(), null);
+                                (int) tileDimension.getHeight(),
+                                null);
                     }
                 } else {
                     g.drawImage(
