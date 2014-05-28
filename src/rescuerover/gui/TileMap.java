@@ -97,6 +97,12 @@ public class TileMap {
         int countery = 0;
         System.out.println("Tile map drawing");
         BufferedImage tileAtPosition;
+
+        long offsetIntegerX = (long) hero.getX();
+        double offsetDecimalX = hero.getOffsetX() - offsetIntegerX;
+
+        System.out.println("offset Decimal x: " + offsetDecimalX);
+
         for (int i = x; i <= x + showDimension.getWidth(); i++) {
             for (int j = y; j < y + showDimension.getHeight(); j++) {
                 try {
@@ -105,8 +111,7 @@ public class TileMap {
                     tileAtPosition = new BufferedImage(32, 32, BufferedImage.TYPE_BYTE_GRAY);
                 }
 
-                long offsetIntegerX = (long) hero.getX();
-                double offsetDecimalX = hero.getOffsetX() - offsetIntegerX;
+
 
                 if(offsetDecimalX > 0) {
                     if(counterx == 0) {
@@ -117,6 +122,27 @@ public class TileMap {
                                 (int) Math.round(tileDimension.getWidth() - tileDimension.getWidth() * offsetDecimalX),
                                 (countery + 1) * (int) tileDimension.getHeight(),
                                 (int) Math.round(offsetDecimalX * 32),
+                                0,
+                                (int) tileAtPosition.getWidth(),
+                                (int) 32,
+                                null);
+                    } else {
+                        g.drawImage(
+                                tileAtPosition,
+                                (int) Math.round( (counterx - offsetDecimalX) * (int) tileDimension.getWidth() ),
+                                countery * (int) tileDimension.getHeight(),
+                                (int) Math.round((int) tileDimension.getWidth()),
+                                (int) tileDimension.getHeight(), null);
+                    }
+                } else if(offsetDecimalX < 0) {
+                    if(counterx == 0) {
+                        g.drawImage(
+                                tileAtPosition,
+                                0,
+                                countery * (int) tileDimension.getHeight(),
+                                (int) Math.round(tileDimension.getWidth() + tileDimension.getWidth() * offsetDecimalX),
+                                (countery + 1) * (int) tileDimension.getHeight(),
+                                (int) Math.round(offsetDecimalX - offsetDecimalX * 32),
                                 0,
                                 (int) tileAtPosition.getWidth(),
                                 (int) 32,

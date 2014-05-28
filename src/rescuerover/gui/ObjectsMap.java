@@ -21,11 +21,6 @@ public class ObjectsMap {
             if( obj.getX() <= Math.abs(heroPosition.getX() + Constants.VISIBLE_TILES / 2)
                     ||  obj.getX() >= Math.abs(heroPosition.getX() - Constants.VISIBLE_TILES / 2)) {
 
-                System.out.println("Obj X: " + obj.getX());
-                System.out.println("Obj offestX: " + obj.getOffsetX());
-
-                System.out.println("Obj Y: " + obj.getY());
-                System.out.println("Obj offestY: " + obj.getOffsetY());
 
                 g.drawImage(
                         obj.getSprite().getFrame(),
