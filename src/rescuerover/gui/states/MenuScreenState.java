@@ -56,11 +56,14 @@ public class MenuScreenState implements ScreenState, Subject {
     @Override
     public void onEnter() {
         panel.setVisible(true);
+        panel.setFocusable(true);
+        panel.revalidate();
     }
 
     @Override
     public void onExit() {
         panel.setVisible(false);
+        panel.setFocusable(false);
     }
 
     @Override

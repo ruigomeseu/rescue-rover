@@ -1,15 +1,36 @@
 package rescuerover.logic;
 
 public class Position {
-	private int x;
-	private int y;
-	private int direction;
+    protected int x;
+    protected int y;
+
+    public double getOffsetX() {
+        return offsetX;
+    }
+
+    public void setOffsetX(double offsetX) {
+        this.offsetX = offsetX;
+    }
+
+    public double getOffsetY() {
+        return offsetY;
+    }
+
+    public void setOffsetY(double offsetY) {
+        this.offsetY = offsetY;
+    }
+
+    protected double offsetX;
+    protected double offsetY;
+    protected int direction;
 	
 	Sprite sprite;
 	
 	public Position(int x, int y, int direction) {
 		this.x = x;
 		this.y = y;
+        this.offsetX = x;
+        this.offsetY = y;
 		this.setDirection(direction);
 	}
 	

@@ -1,5 +1,5 @@
 package rescuerover.logic;
 
 public interface Movable {
-	boolean move(int direction);
+	void move(int direction);
 }

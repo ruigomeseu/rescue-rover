@@ -10,7 +10,7 @@ public class Robot extends MapObject implements Movable {
     }
 
     @Override
-    public boolean move(int direction) {
-        return false;
+    public void move(int direction) {
+
     }
 }

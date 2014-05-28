@@ -1,6 +1,8 @@
 package rescuerover.gui.states;
 
 import rescuerover.gui.GamePanel;
+import rescuerover.gui.GameThread;
+import rescuerover.gui.MovementKeyListener;
 import rescuerover.gui.TileMap;
 import rescuerover.logic.*;
 
@@ -15,7 +17,6 @@ public class GameScreenState implements ScreenState, Subject {
     ScreenState nextState;
     JPanel panel;
     GamePanel gamePanel;
-
 
     protected GameScreenState(JFrame frame) {
         panel = new JPanel();
@@ -33,7 +34,6 @@ public class GameScreenState implements ScreenState, Subject {
 
         panel.add(gamePanel, gbc);
 
-
         TileSet tileSet = new TileSet(32, 25, 18, "/tileset.png");
         // loads tiles -> no blocks
         tileSet.loadTile(TileSet.NO_BLOCKS, TileSet.NO_BLOCKS);
@@ -42,18 +42,25 @@ public class GameScreenState implements ScreenState, Subject {
         // Adds a tile set to load map
         tileMap.setTileSet(tileSet);
         // Set different position to start showing map
-        tileMap.setPosition(0, 0);
+        tileMap.setPosition(6, 6);
 
         tileMap.setTileDimension(new Dimension(Constants.WIDTH / Constants.VISIBLE_TILES, Constants.HEIGHT / Constants.VISIBLE_TILES));
         tileMap.setShowDimension(new Dimension(Constants.VISIBLE_TILES, Constants.VISIBLE_TILES));
 
         // loads the map from map file
-        tileMap.loadMap(5, ",");
+        tileMap.loadMap(0, ",");
 
         Map map = new Map(tileMap);
+
+        Hero hero = new Hero(11, 11, Constants.UP, map);
+        map.addMapObject(hero);
         gamePanel.setMap(map);
 
-        gamePanel.repaint();
+        gamePanel.addKeyListener(new MovementKeyListener(hero));
+
+        GameThread gameThread = new GameThread(gamePanel, hero);
+
+        gameThread.start();
     }
 
     public static GameScreenState getInstance(JFrame frame) {
@@ -71,11 +78,16 @@ public class GameScreenState implements ScreenState, Subject {
     @Override
     public void onEnter() {
         panel.setVisible(true);
+        panel.setFocusable(false);
+        gamePanel.setFocusable(true);
+        gamePanel.requestFocus(true);
+        panel.revalidate();
     }
 
     @Override
     public void onExit() {
         panel.setVisible(false);
+        panel.setFocusable(false);
     }
 
     @Override

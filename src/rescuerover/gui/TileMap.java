@@ -61,6 +61,10 @@ public class TileMap {
         this.tileSet = tileSet;
     }
 
+    public Dimension getTileDimension() {
+        return this.tileDimension;
+    }
+
     public void loadMap(int mapStartLine, String delim) {
         InputStream in = getClass().getResourceAsStream(mapFile);
         BufferedReader br = new BufferedReader(new InputStreamReader(in));
@@ -89,14 +93,14 @@ public class TileMap {
     public void draw(Graphics g) {
         int counterx = 0;
         int countery = 0;
+        System.out.println("Tile map drawing");
         BufferedImage tileAtPosition;
         for (int i = x; i < x + showDimension.getWidth(); i++) {
             for (int j = y; j < y + showDimension.getHeight(); j++) {
-
                 try {
                     tileAtPosition = tileSet.getImageAtPosition(map[j][i] - 1);
                 } catch(ArrayIndexOutOfBoundsException e) {
-                    tileAtPosition = tileSet.getImageAtPosition(0);
+                    tileAtPosition = new BufferedImage(32, 32, BufferedImage.TYPE_BYTE_GRAY);
                 }
                 g.drawImage(
                         tileAtPosition,

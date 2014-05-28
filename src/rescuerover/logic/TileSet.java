@@ -129,13 +129,6 @@ public class TileSet {
                 for (int j = 0; j < numCols; j++) {
                     subImage = tileImage.getSubimage(j * tileSize, i * tileSize, tileSize, tileSize);
                     tiles[counter] = new Tile(subImage, tileSize);
-                    if (blockRowPosition != -1 && blockColPosition != -1) {
-                        if (i > blockRowPosition)
-                            type = Tile.UNPASSABLE;
-                        if (i == blockRowPosition && j >= blockColPosition)
-                            type = Tile.UNPASSABLE;
-                    }
-
                     tiles[counter].setType(type);
                     counter++;
                 }

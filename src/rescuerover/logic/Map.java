@@ -16,8 +16,9 @@ public class Map {
     public ObjectsMap objectsMap;
 	
 	public Map(TileMap tileMap) {
-        this.objectsMap = new ObjectsMap(objects);
         this.tileMap = tileMap;
+        this.objectsMap = new ObjectsMap(objects, tileMap.getTileDimension());
+
 	}
 	
 	public void addMapObject(MapObject object) {
