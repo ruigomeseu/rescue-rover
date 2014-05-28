@@ -76,7 +76,7 @@ public class Hero extends MapObject implements Movable {
                 } else {
                     this.incX();
                     this.offsetX = this.getX();
-                    sprite.setFrameNumber(18);
+                    sprite.setFrameNumber(16);
                     map.tileMap.setPosition(
                             this.getX() - Constants.VISIBLE_TILES/2,
                             this.getY() - Constants.VISIBLE_TILES/2);
@@ -101,7 +101,7 @@ public class Hero extends MapObject implements Movable {
                 } else {
                     this.decX();
                     this.offsetX = this.getX();
-                    sprite.setFrameNumber(27);
+                    sprite.setFrameNumber(25);
                     map.tileMap.setPosition(
                             this.getX() - Constants.VISIBLE_TILES/2,
                             this.getY() - Constants.VISIBLE_TILES/2);

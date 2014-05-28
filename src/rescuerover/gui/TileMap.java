@@ -103,7 +103,7 @@ public class TileMap {
 
         System.out.println("offset Decimal x: " + offsetDecimalX);
 
-        for (int i = x; i <= x + showDimension.getWidth(); i++) {
+        for (int i = x -1; i <= x + showDimension.getWidth(); i++) {
             for (int j = y; j < y + showDimension.getHeight(); j++) {
                 try {
                     tileAtPosition = tileSet.getImageAtPosition(map[j][i] - 1);
@@ -135,21 +135,36 @@ public class TileMap {
                     }
                 } else if(offsetDecimalX < 0) {
                     if(counterx == 0) {
+                        BufferedImage oldTileAtPosition = tileAtPosition;
+                        try {
+                            tileAtPosition = tileSet.getImageAtPosition(map[j][i-1] - 1);
+                        } catch(ArrayIndexOutOfBoundsException e) {
+                            tileAtPosition = new BufferedImage(32, 32, BufferedImage.TYPE_BYTE_GRAY);
+                        }
+                        System.out.println("start map cube: " + (int) Math.round(32  + offsetDecimalX * 32));
                         g.drawImage(
                                 tileAtPosition,
-                                counterx * (int) (tileDimension.getWidth() - tileDimension.getWidth()*offsetDecimalX),
-                                countery * (int) tileDimension.getHeight(),
-                                (counterx + 1) * (int) tileDimension.getWidth(),
-                                (countery + 1) * (int) tileDimension.getHeight(),
-                                (int) Math.round(offsetDecimalX * 32),
                                 0,
-                                (int) tileAtPosition.getWidth(),
+                                countery * (int) tileDimension.getHeight(),
+                                (int) Math.round (-1 * offsetDecimalX * (int) tileDimension.getWidth() ),
+                                (countery + 1) * (int) tileDimension.getHeight(),
+                                (int) Math.round(32  + offsetDecimalX * 32),
+                                0,
                                 (int) 32,
+                                (int) 32,
+                                null);
+                        tileAtPosition = oldTileAtPosition;
+                        g.drawImage(
+                                tileAtPosition,
+                                (int) Math.round( (counterx - offsetDecimalX) * (int) tileDimension.getWidth() + offsetDecimalX ),
+                                countery * (int) tileDimension.getHeight(),
+                                (int) Math.round((int) tileDimension.getWidth()),
+                                (int) tileDimension.getHeight(),
                                 null);
                     } else {
                         g.drawImage(
                                 tileAtPosition,
-                                (int) Math.round( (counterx - offsetDecimalX) * (int) tileDimension.getWidth() ),
+                                (int) Math.round( (counterx - offsetDecimalX) * (int) tileDimension.getWidth() + offsetDecimalX ),
                                 countery * (int) tileDimension.getHeight(),
                                 (int) Math.round((int) tileDimension.getWidth()),
                                 (int) tileDimension.getHeight(),
