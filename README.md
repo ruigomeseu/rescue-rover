@@ -15,5 +15,5 @@ TBD
 
 This was originally developed by [Rui Gomes](http://www.github.com/ruigomeseu) and [Tiago Ferreira](http://www.github.com/tiagommferreira) and is shared under the MIT License.
 
-###Sprites
+####Sprites
 * Crono, from Chrono Trigger by Square - Downloaded at [The Spriters Resource](http://www.spriters-resource.com/snes/chronotrigger/sheet/2514/)
