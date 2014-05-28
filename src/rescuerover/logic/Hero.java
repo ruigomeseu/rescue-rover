@@ -32,7 +32,7 @@ public class Hero extends MapObject implements Movable {
                 break;
             case Constants.DOWN:
                 this.moving = true;
-                this.direction = Constants.UP;
+                this.direction = Constants.DOWN;
                 sprite.setLimits(3, 8);
                 sprite.setFrameNumber(3);
                 break;
@@ -87,6 +87,7 @@ public class Hero extends MapObject implements Movable {
                     this.offsetY += 1/(double) framesPerMovement;
                 } else {
                     this.incY();
+                    System.out.print("Hero y: " + this.y);
                     this.offsetY = this.getY();
                     sprite.setFrameNumber(2);
                     map.tileMap.setPosition(
