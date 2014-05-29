@@ -87,7 +87,6 @@ public class Hero extends MapObject implements Movable {
                     this.offsetY += 1/(double) framesPerMovement;
                 } else {
                     this.incY();
-                    System.out.print("Hero y: " + this.y);
                     this.offsetY = this.getY();
                     sprite.setFrameNumber(2);
                     map.tileMap.setPosition(

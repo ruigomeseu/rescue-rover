@@ -36,7 +36,8 @@ public class GameScreenState implements ScreenState, Subject {
 
         TileSet tileSet = new TileSet(32, 25, 18, "/tileset.png");
         // loads tiles -> no blocks
-        tileSet.loadTile(TileSet.NO_BLOCKS, TileSet.NO_BLOCKS);
+        tileSet.loadTile();
+        tileSet.loadTilesProperties("/tileproperties", ",");
 
         TileMap tileMap = new TileMap(new Dimension(30,30), "/map");
         // Adds a tile set to load map

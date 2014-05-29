@@ -3,6 +3,10 @@ package rescuerover.logic;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 public class TileSet {
     public static final int NO_BLOCKS = -1;
@@ -113,10 +117,8 @@ public class TileSet {
     /**
      * Loads all tiles from tile file
      *
-     * @param blockRowPosition row where block tiles start
-     * @param blockColPosition column where block tiles start
      */
-    public void loadTile(int blockRowPosition, int blockColPosition) {
+    public void loadTile() {
         try {
             tileImage = ImageIO.read(
                     getClass().getResourceAsStream(tile)
@@ -128,7 +130,7 @@ public class TileSet {
             for (int i = 0; i < numRows; i++) {
                 for (int j = 0; j < numCols; j++) {
                     subImage = tileImage.getSubimage(j * tileSize, i * tileSize, tileSize, tileSize);
-                    tiles[counter] = new Tile(subImage, tileSize);
+                    tiles[counter] = new Tile(subImage, tileSize, 1);
                     tiles[counter].setType(type);
                     counter++;
                 }
@@ -136,6 +138,38 @@ public class TileSet {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void loadTilesProperties(String fileName, String delim) {
+        InputStream in = getClass().getResourceAsStream(fileName);
+        BufferedReader br = new BufferedReader(new InputStreamReader(in));
+
+        try {
+            for (int lineNumber = 0; lineNumber < 3; lineNumber++) {
+                String line = br.readLine();
+                String[] tokens = line.split(delim);
+                for(int i=0; i<tokens.length; i++) {
+                    switch(lineNumber) {
+                        case 0:
+                            for(Tile tile : tiles) {
+                                if(tile.getTileNumber() == Integer.parseInt(tokens[i])) {
+                                    tile.setType(Tile.UNPASSABLE);
+                                }
+                            }
+                            break;
+                        case 1:
+                            break;
+                        case 2:
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public void draw(Graphics2D g) {

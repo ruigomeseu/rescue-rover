@@ -71,7 +71,6 @@ public class TileMap {
         InputStream in = getClass().getResourceAsStream(mapFile);
         BufferedReader br = new BufferedReader(new InputStreamReader(in));
 
-        // go to line
         for (int i = 0; i < mapStartLine; i++) {
             try {
                 br.readLine();
@@ -95,81 +94,31 @@ public class TileMap {
     public void draw(Graphics g) {
         int counterx = 0;
         int countery = 0;
-        System.out.println("Tile map drawing");
         BufferedImage tileAtPosition;
 
         long offsetIntegerX = (long) hero.getX();
         double offsetDecimalX = hero.getOffsetX() - offsetIntegerX;
 
-        System.out.println("offset Decimal x: " + offsetDecimalX);
+        long offsetIntegerY = (long) hero.getY();
+        double offsetDecimalY = hero.getOffsetY() - offsetIntegerY;
 
-        for (int i = x -1; i <= x + showDimension.getWidth(); i++) {
-            for (int j = y; j < y + showDimension.getHeight(); j++) {
+        for (int i = x ; i <= x + showDimension.getWidth(); i++) {
+            for (int j = y; j <= y + showDimension.getHeight(); j++) {
                 try {
                     tileAtPosition = tileSet.getImageAtPosition(map[j][i] - 1);
+                    System.out.println("tile type: " + tileAtPosition.getType());
                 } catch(ArrayIndexOutOfBoundsException e) {
                     tileAtPosition = new BufferedImage(32, 32, BufferedImage.TYPE_BYTE_GRAY);
                 }
 
                 if(offsetDecimalX > 0) {
-                    if(counterx == 0) {
-                        g.drawImage(
-                                tileAtPosition,
-                                counterx * (int) tileDimension.getWidth(),
-                                countery * (int) tileDimension.getHeight(),
-                                (int) Math.round(tileDimension.getWidth() - tileDimension.getWidth() * offsetDecimalX),
-                                (countery + 1) * (int) tileDimension.getHeight(),
-                                (int) Math.round(offsetDecimalX * 32),
-                                0,
-                                (int) tileAtPosition.getWidth(),
-                                (int) 32,
-                                null);
-                    } else {
-                        g.drawImage(
-                                tileAtPosition,
-                                (int) Math.round( (counterx - offsetDecimalX) * (int) tileDimension.getWidth() ),
-                                countery * (int) tileDimension.getHeight(),
-                                (int) Math.round((int) tileDimension.getWidth()),
-                                (int) tileDimension.getHeight(),
-                                null);
-                    }
+                    drawMovingRight(g, counterx, countery, tileAtPosition, offsetDecimalX);
                 } else if(offsetDecimalX < 0) {
-                    if(counterx == 0) {
-                        BufferedImage oldTileAtPosition = tileAtPosition;
-                        try {
-                            tileAtPosition = tileSet.getImageAtPosition(map[j][i-1] - 1);
-                        } catch(ArrayIndexOutOfBoundsException e) {
-                            tileAtPosition = new BufferedImage(32, 32, BufferedImage.TYPE_BYTE_GRAY);
-                        }
-                        System.out.println("start map cube: " + (int) Math.round(32  + offsetDecimalX * 32));
-                        g.drawImage(
-                                tileAtPosition,
-                                0,
-                                countery * (int) tileDimension.getHeight(),
-                                (int) Math.round (-1 * offsetDecimalX * (int) tileDimension.getWidth() ),
-                                (countery + 1) * (int) tileDimension.getHeight(),
-                                (int) Math.round(32  + offsetDecimalX * 32),
-                                0,
-                                (int) 32,
-                                (int) 32,
-                                null);
-                        tileAtPosition = oldTileAtPosition;
-                        g.drawImage(
-                                tileAtPosition,
-                                (int) Math.round( (counterx - offsetDecimalX) * (int) tileDimension.getWidth() + offsetDecimalX ),
-                                countery * (int) tileDimension.getHeight(),
-                                (int) Math.round((int) tileDimension.getWidth()),
-                                (int) tileDimension.getHeight(),
-                                null);
-                    } else {
-                        g.drawImage(
-                                tileAtPosition,
-                                (int) Math.round( (counterx - offsetDecimalX) * (int) tileDimension.getWidth() + offsetDecimalX ),
-                                countery * (int) tileDimension.getHeight(),
-                                (int) Math.round((int) tileDimension.getWidth()),
-                                (int) tileDimension.getHeight(),
-                                null);
-                    }
+                    drawMovingLeft(g, counterx, countery, tileAtPosition, offsetDecimalX, i, j);
+                } else if(offsetDecimalY > 0) {
+                    drawMovingDown(g, counterx, countery, tileAtPosition, offsetDecimalY);
+                } else if(offsetDecimalY < 0) {
+                    drawMovingUp(g, counterx, countery, tileAtPosition, offsetDecimalY, i, j);
                 } else {
                     g.drawImage(
                             tileAtPosition,
@@ -182,6 +131,133 @@ public class TileMap {
             }
             counterx++;
             countery = 0;
+        }
+    }
+
+    private void drawMovingUp(Graphics g, int counterx, int countery, BufferedImage tileAtPosition, double offsetDecimalY, int i, int j) {
+        if(countery == 0) {
+            BufferedImage oldTileAtPosition = tileAtPosition;
+            try {
+                tileAtPosition = tileSet.getImageAtPosition(map[j-1][i] - 1);
+            } catch(ArrayIndexOutOfBoundsException e) {
+                tileAtPosition = new BufferedImage(32, 32, BufferedImage.TYPE_BYTE_GRAY);
+            }
+
+            g.drawImage(
+                    tileAtPosition,
+                    counterx * (int) tileDimension.getWidth(),
+                    0,
+                    (counterx + 1) * (int) tileDimension.getHeight(),
+                    (int) Math.round (-1 * offsetDecimalY * (int) tileDimension.getWidth() ),
+                    0,
+                    (int) Math.round(32  + offsetDecimalY * 32),
+                    (int) 32,
+                    (int) 32,
+                    null);
+            tileAtPosition = oldTileAtPosition;
+            g.drawImage(
+                    tileAtPosition,
+                    counterx * (int) tileDimension.getHeight(),
+                    (int) Math.round( (countery - offsetDecimalY) * (int) tileDimension.getWidth() + offsetDecimalY ),
+
+                    (int) Math.round((int) tileDimension.getWidth()),
+                    (int) tileDimension.getHeight(),
+                    null);
+        } else {
+            g.drawImage(
+                    tileAtPosition,
+                    counterx * (int) tileDimension.getHeight(),
+                    (int) Math.round( (countery - offsetDecimalY) * (int) tileDimension.getWidth() + offsetDecimalY ),
+                    (int) Math.round((int) tileDimension.getWidth()),
+                    (int) tileDimension.getHeight(),
+                    null);
+        }
+    }
+
+    private void drawMovingDown(Graphics g, int counterx, int countery, BufferedImage tileAtPosition, double offsetDecimalY) {
+        if(countery == 0) {
+            g.drawImage(
+                    tileAtPosition,
+                    counterx * (int) tileDimension.getWidth(),
+                    countery * (int) tileDimension.getHeight(),
+                    (counterx + 1) * (int) tileDimension.getHeight(),
+                    (int) Math.round(tileDimension.getWidth() - tileDimension.getWidth() * offsetDecimalY),
+                    0,
+                    (int) Math.round(offsetDecimalY * 32),
+                    (int) tileAtPosition.getWidth(),
+                    (int) 32,
+                    null);
+        } else {
+            g.drawImage(
+                    tileAtPosition,
+                    counterx * (int) tileDimension.getHeight(),
+                    (int) Math.round( (countery - offsetDecimalY) * (int) tileDimension.getWidth() ),
+                    (int) Math.round((int) tileDimension.getWidth()),
+                    (int) tileDimension.getHeight(),
+                    null);
+        }
+    }
+
+    private void drawMovingLeft(Graphics g, int counterx, int countery, BufferedImage tileAtPosition, double offsetDecimalX, int i, int j) {
+        if(counterx == 0) {
+            BufferedImage oldTileAtPosition = tileAtPosition;
+            try {
+                tileAtPosition = tileSet.getImageAtPosition(map[j][i-1] - 1);
+            } catch(ArrayIndexOutOfBoundsException e) {
+                tileAtPosition = new BufferedImage(32, 32, BufferedImage.TYPE_BYTE_GRAY);
+            }
+
+            g.drawImage(
+                    tileAtPosition,
+                    0,
+                    countery * (int) tileDimension.getHeight(),
+                    (int) Math.round (-1 * offsetDecimalX * (int) tileDimension.getWidth() ),
+                    (countery + 1) * (int) tileDimension.getHeight(),
+                    (int) Math.round(32  + offsetDecimalX * 32),
+                    0,
+                    (int) 32,
+                    (int) 32,
+                    null);
+            tileAtPosition = oldTileAtPosition;
+            g.drawImage(
+                    tileAtPosition,
+                    (int) Math.round( (counterx - offsetDecimalX) * (int) tileDimension.getWidth() + offsetDecimalX ),
+                    countery * (int) tileDimension.getHeight(),
+                    (int) Math.round((int) tileDimension.getWidth()),
+                    (int) tileDimension.getHeight(),
+                    null);
+        } else {
+            g.drawImage(
+                    tileAtPosition,
+                    (int) Math.round( (counterx - offsetDecimalX) * (int) tileDimension.getWidth() + offsetDecimalX ),
+                    countery * (int) tileDimension.getHeight(),
+                    (int) Math.round((int) tileDimension.getWidth()),
+                    (int) tileDimension.getHeight(),
+                    null);
+        }
+    }
+
+    private void drawMovingRight(Graphics g, int counterx, int countery, BufferedImage tileAtPosition, double offsetDecimalX) {
+        if(counterx == 0) {
+            g.drawImage(
+                    tileAtPosition,
+                    counterx * (int) tileDimension.getWidth(),
+                    countery * (int) tileDimension.getHeight(),
+                    (int) Math.round(tileDimension.getWidth() - tileDimension.getWidth() * offsetDecimalX),
+                    (countery + 1) * (int) tileDimension.getHeight(),
+                    (int) Math.round(offsetDecimalX * 32),
+                    0,
+                    (int) tileAtPosition.getWidth(),
+                    (int) 32,
+                    null);
+        } else {
+            g.drawImage(
+                    tileAtPosition,
+                    (int) Math.round( (counterx - offsetDecimalX) * (int) tileDimension.getWidth() ),
+                    countery * (int) tileDimension.getHeight(),
+                    (int) Math.round((int) tileDimension.getWidth()),
+                    (int) tileDimension.getHeight(),
+                    null);
         }
     }
 

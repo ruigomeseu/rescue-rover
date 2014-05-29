@@ -20,33 +20,19 @@ public class MovementKeyListener implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        System.out.println("Key Pressed");
         int code = e.getKeyCode();
-        switch (code) {
-            case KeyEvent.VK_W:
-            case KeyEvent.VK_UP:
-                hero.move(Constants.UP);
-                break;
-            case KeyEvent.VK_A:
-            case KeyEvent.VK_LEFT:
-                hero.move(Constants.LEFT);
-                break;
-            case KeyEvent.VK_S:
-            case KeyEvent.VK_DOWN:
-                hero.move(Constants.DOWN);
-                break;
-            case KeyEvent.VK_D:
-            case KeyEvent.VK_RIGHT:
-                hero.move(Constants.RIGHT);
-                break;
-        }
+        moveHero(code);
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        System.out.println("Key Pressed");
         int code = e.getKeyCode();
-        if (!hero.isMoving())
+        moveHero(code);
+    }
+
+    private void moveHero(int code) {
+        if (!hero.isMoving()) {
+            System.out.println("Hero MOVE!!");
             switch (code) {
                 case KeyEvent.VK_W:
                 case KeyEvent.VK_UP:
@@ -65,5 +51,6 @@ public class MovementKeyListener implements KeyListener {
                     hero.move(Constants.RIGHT);
                     break;
             }
+        }
     }
 }

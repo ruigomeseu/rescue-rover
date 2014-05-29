@@ -51,7 +51,6 @@ public class Sprite {
 
         for (int i = 0; i < numRows; i++) {
             for (int j = 0; j < numCols; j++) {
-                System.out.println("tileSize: " + tileSize);
                 subImage = sprite.getSubimage(j * tileSize, i * tileSize, tileSize, tileSize);
                 sprites[counter] = subImage;
                 counter++;
