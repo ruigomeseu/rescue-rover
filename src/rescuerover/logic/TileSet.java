@@ -114,6 +114,10 @@ public class TileSet {
         return tiles[position].getTile();
     }
 
+    public Tile getTileAtPosition(int position) {
+        return tiles[position];
+    }
+
     /**
      * Loads all tiles from tile file
      *
@@ -126,11 +130,11 @@ public class TileSet {
             int counter = 0;
 
             BufferedImage subImage;
-            int type = Tile.NORMAL;
+            int type = Tile.UNPASSABLE;
             for (int i = 0; i < numRows; i++) {
                 for (int j = 0; j < numCols; j++) {
                     subImage = tileImage.getSubimage(j * tileSize, i * tileSize, tileSize, tileSize);
-                    tiles[counter] = new Tile(subImage, tileSize, 1);
+                    tiles[counter] = new Tile(subImage, tileSize, counter + 1);
                     tiles[counter].setType(type);
                     counter++;
                 }
@@ -145,7 +149,7 @@ public class TileSet {
         BufferedReader br = new BufferedReader(new InputStreamReader(in));
 
         try {
-            for (int lineNumber = 0; lineNumber < 3; lineNumber++) {
+            for (int lineNumber = 0; lineNumber < 2; lineNumber++) {
                 String line = br.readLine();
                 String[] tokens = line.split(delim);
                 for(int i=0; i<tokens.length; i++) {
@@ -153,13 +157,16 @@ public class TileSet {
                         case 0:
                             for(Tile tile : tiles) {
                                 if(tile.getTileNumber() == Integer.parseInt(tokens[i])) {
-                                    tile.setType(Tile.UNPASSABLE);
+                                    tile.setType(Tile.NORMAL);
                                 }
                             }
                             break;
                         case 1:
-                            break;
-                        case 2:
+                            for(Tile tile : tiles) {
+                                if(tile.getTileNumber() == Integer.parseInt(tokens[i])) {
+                                    tile.setType(Tile.KILL);
+                                }
+                            }
                             break;
                         default:
                             break;

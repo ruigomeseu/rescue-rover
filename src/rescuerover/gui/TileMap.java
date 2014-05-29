@@ -1,6 +1,7 @@
 package rescuerover.gui;
 
 import rescuerover.logic.Hero;
+import rescuerover.logic.Tile;
 import rescuerover.logic.TileSet;
 
 import java.awt.*;
@@ -106,7 +107,6 @@ public class TileMap {
             for (int j = y; j <= y + showDimension.getHeight(); j++) {
                 try {
                     tileAtPosition = tileSet.getImageAtPosition(map[j][i] - 1);
-                    System.out.println("tile type: " + tileAtPosition.getType());
                 } catch(ArrayIndexOutOfBoundsException e) {
                     tileAtPosition = new BufferedImage(32, 32, BufferedImage.TYPE_BYTE_GRAY);
                 }
@@ -261,7 +261,15 @@ public class TileMap {
         }
     }
 
+    public boolean isTileUnpassable(int x, int y) {
+        return (tileSet.getTileAtPosition(map[y][x] - 1).getType() == Tile.UNPASSABLE);
+    }
+
     public void setHero(Hero hero) {
         this.hero = hero;
+    }
+
+    public boolean isKillingTile(int x, int y) {
+        return (tileSet.getTileAtPosition(map[y][x] - 1).getType() == Tile.KILL);
     }
 }

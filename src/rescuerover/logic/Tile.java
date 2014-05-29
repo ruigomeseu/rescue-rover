@@ -3,8 +3,9 @@ package rescuerover.logic;
 import java.awt.image.BufferedImage;
 
 public class Tile {
-    public static final int UNPASSABLE = 1;
     public static final int NORMAL = 0;
+    public static final int UNPASSABLE = 1;
+    public static final int KILL = 2;
 
     private BufferedImage tile;
     private int tileSize;

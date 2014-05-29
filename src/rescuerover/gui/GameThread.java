@@ -6,10 +6,10 @@ import javax.swing.*;
 
 public class GameThread extends Thread implements Runnable {
 
-    private JPanel gamePanel;
+    private GamePanel gamePanel;
     private Hero hero;
 
-    public GameThread(JPanel gamePanel, Hero hero) {
+    public GameThread(GamePanel gamePanel, Hero hero) {
         this.gamePanel = gamePanel;
         this.hero = hero;
     }
@@ -17,10 +17,25 @@ public class GameThread extends Thread implements Runnable {
 
     @Override
     public void run() {
-        while(hero.isAlive()) {
+        while(hero.isAlive() || hero.isMoving()) {
             gamePanel.repaint();
             try {
                 Thread.sleep(50);
+            } catch(Exception e) {
+                System.out.println("Exception at Thread Sleep: " + e);
+            }
+        }
+
+        /**
+         * Display death animation
+         */
+        hero.getSprite().setLimits(34, 40);
+        hero.getSprite().setFrameNumber(34);
+        for(int i = 0; i < 6; i++) {
+            hero.getSprite().incrementFrameNumber();
+            gamePanel.repaint();
+            try {
+                Thread.sleep(250);
             } catch(Exception e) {
                 System.out.println("Exception at Thread Sleep: " + e);
             }

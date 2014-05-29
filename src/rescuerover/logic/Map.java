@@ -42,4 +42,12 @@ public class Map {
         return new Position(0,0,0);
     }
 
+    public boolean isValidMove(int x, int y) {
+        return (! tileMap.isTileUnpassable(x, y));
+    }
+
+    public boolean isKillingTile(int x, int y) {
+        return tileMap.isKillingTile(x, y);
+    }
+
 }

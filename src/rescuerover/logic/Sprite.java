@@ -77,7 +77,6 @@ public class Sprite {
      */
     public boolean incrementFrameNumber() {
         frameNumber++;
-        System.out.println("Frame Number: " + frameNumber);
         if (frameNumber > higherLimit) {
             frameNumber = lowerLimit;
             return true;
@@ -85,6 +84,9 @@ public class Sprite {
         return false;
     }
 
+    public int getFrameNumber() {
+        return this.frameNumber;
+    }
     public void setFrameNumber(int frameNumber) {
         this.frameNumber = frameNumber;
     }

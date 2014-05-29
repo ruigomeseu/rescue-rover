@@ -30,6 +30,7 @@ public class ObjectsMap {
                         (int) tileDimension.getHeight(),
                         null);
 
+                System.out.println("Hero frame = " + obj.getSprite().getFrameNumber());
                 if(obj.isMoving())
                     obj.step();
             }
