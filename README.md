@@ -9,7 +9,7 @@ TBD
 
 ##Design Patterns Used
 
-TBD
+State pattern
 
 ##Credits
 

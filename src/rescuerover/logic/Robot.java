@@ -13,4 +13,8 @@ public class Robot extends MapObject implements Movable {
     public void move(int direction) {
 
     }
+
+    public void step() {
+
+    }
 }

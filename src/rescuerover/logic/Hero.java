@@ -36,6 +36,9 @@ public class Hero extends MapObject implements Movable {
                 if (map.isValidMove(this.x + 1, this.y)) {
                     this.moving = true;
                     this.direction = Constants.RIGHT;
+                    if (map.isKillingTile(this.x + 1, this.y)) {
+                        this.alive = false;
+                    }
                     sprite.setLimits(19, 24);
                     sprite.setFrameNumber(19);
                 } else {
@@ -47,6 +50,9 @@ public class Hero extends MapObject implements Movable {
                 if (map.isValidMove(this.x, this.y + 1)) {
                     this.moving = true;
                     this.direction = Constants.DOWN;
+                    if (map.isKillingTile(this.x, this.y + 1)) {
+                        this.alive = false;
+                    }
                     sprite.setLimits(3, 8);
                     sprite.setFrameNumber(3);
                 } else {
@@ -57,6 +63,9 @@ public class Hero extends MapObject implements Movable {
                 if (map.isValidMove(this.x - 1, this.y)) {
                     this.moving = true;
                     this.direction = Constants.LEFT;
+                    if (map.isKillingTile(this.x - 1, this.y)) {
+                        this.alive = false;
+                    }
                     sprite.setLimits(28, 33);
                     sprite.setFrameNumber(28);
                 } else {

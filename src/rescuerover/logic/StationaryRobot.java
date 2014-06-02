@@ -11,4 +11,8 @@ public class StationaryRobot extends Robot {
         sprite = new Sprite(12, 4, 32, "/robot.png");
     }
 
+    public void step() {
+
+    }
+
 }

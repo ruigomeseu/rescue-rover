@@ -54,7 +54,10 @@ public class GameScreenState implements ScreenState, Subject {
         Map map = new Map(tileMap);
 
         Hero hero = new Hero(11, 11, Constants.UP, map);
+        StationaryRobot robot = new StationaryRobot(10,10,Constants.RIGHT);
+
         map.addMapObject(hero);
+        map.addMapObject(robot);
         tileMap.setHero(hero);
         gamePanel.setMap(map);
 
