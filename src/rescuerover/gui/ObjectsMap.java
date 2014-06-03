@@ -35,7 +35,7 @@ public class ObjectsMap {
                     heroY = obj.getY();
                     g.drawImage(
                             obj.getSprite().getFrame(),
-                            Math.round((Constants.VISIBLE_TILES / 2) * (int) tileDimension.getWidth()),
+                            (Constants.VISIBLE_TILES / 2) * (int) tileDimension.getWidth(),
                             (Constants.VISIBLE_TILES / 2) * (int) tileDimension.getHeight(),
                             (int) tileDimension.getWidth(),
                             (int) tileDimension.getHeight(),
@@ -69,7 +69,7 @@ public class ObjectsMap {
             //drawMovingRight(g, counterx, countery, tileAtPosition, offsetDecimalX);
             g.drawImage(
                     obj.getSprite().getFrame(),
-                    (int) Math.round((((Constants.VISIBLE_TILES / 2) + deltaHeroX) - offsetDecimalX) * tileDimension.getWidth()),
+                    (int) Math.round((((Constants.VISIBLE_TILES / 2) + deltaHeroX) - offsetDecimalX + 1/6.0) * tileDimension.getWidth()),
                     (int) Math.round(((Constants.VISIBLE_TILES / 2) + deltaHeroY) * (int) tileDimension.getHeight()),
                     (int) tileDimension.getWidth(),
                     (int) tileDimension.getHeight(),
@@ -79,7 +79,7 @@ public class ObjectsMap {
             x = 0;
             g.drawImage(
                     obj.getSprite().getFrame(),
-                    (int) Math.round((((Constants.VISIBLE_TILES / 2) + deltaHeroX) - offsetDecimalX) * (int) tileDimension.getWidth()),
+                    (int) Math.round((((Constants.VISIBLE_TILES / 2) + deltaHeroX) - offsetDecimalX - 1/6.0) * (int) tileDimension.getWidth()),
                     (int) Math.round(((Constants.VISIBLE_TILES / 2) + deltaHeroY) * (int) tileDimension.getHeight()),
                     (int) tileDimension.getWidth(),
                     (int) tileDimension.getHeight(),
@@ -89,7 +89,7 @@ public class ObjectsMap {
             g.drawImage(
                     obj.getSprite().getFrame(),
                     (int) Math.round((((Constants.VISIBLE_TILES / 2) + deltaHeroX)) * (int) tileDimension.getWidth()),
-                    (int) Math.round((((Constants.VISIBLE_TILES / 2) + deltaHeroY) - offsetDecimalY) * (int) tileDimension.getHeight()),
+                    (int) Math.round((((Constants.VISIBLE_TILES / 2) + deltaHeroY) - offsetDecimalY + 1/6.0) * (int) tileDimension.getHeight()),
                     (int) tileDimension.getWidth(),
                     (int) tileDimension.getHeight(),
                     null);
@@ -98,17 +98,25 @@ public class ObjectsMap {
             g.drawImage(
                     obj.getSprite().getFrame(),
                     (int) Math.round((((Constants.VISIBLE_TILES / 2) + deltaHeroX)) * (int) tileDimension.getWidth()),
-                    (int) Math.round((((Constants.VISIBLE_TILES / 2) + deltaHeroY) - offsetDecimalY) * (int) tileDimension.getHeight()),
+                    (int) Math.round((((Constants.VISIBLE_TILES / 2) + deltaHeroY) - offsetDecimalY - 1/6.0) * (int) tileDimension.getHeight()),
                     (int) tileDimension.getWidth(),
                     (int) tileDimension.getHeight(),
                     null);
         } else {
             System.out.println("deltaHeroX: " + deltaHeroX);
             System.out.println("deltaHeroY: " + deltaHeroY);
-            if(x != 0){
+            if(x != 0) {
                 g.drawImage(
                         obj.getSprite().getFrame(),
                         Math.round(((Constants.VISIBLE_TILES / 2) + deltaHeroX) * (int) tileDimension.getWidth()),
+                        Math.round(((Constants.VISIBLE_TILES / 2) + deltaHeroY) * (int) tileDimension.getWidth()),
+                        (int) tileDimension.getWidth(),
+                        (int) tileDimension.getHeight(),
+                        null);
+            } else {
+                g.drawImage(
+                        obj.getSprite().getFrame(),
+                        (int) Math.round(((Constants.VISIBLE_TILES / 2) + (obj.getX() - hero.getOffsetX())) * (int) tileDimension.getWidth()),
                         Math.round(((Constants.VISIBLE_TILES / 2) + deltaHeroY) * (int) tileDimension.getWidth()),
                         (int) tileDimension.getWidth(),
                         (int) tileDimension.getHeight(),
