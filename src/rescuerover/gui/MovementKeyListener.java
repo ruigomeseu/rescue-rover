@@ -24,6 +24,7 @@ public class MovementKeyListener implements KeyListener {
         moveHero(code);
     }
 
+
     @Override
     public void keyReleased(KeyEvent e) {
         int code = e.getKeyCode();

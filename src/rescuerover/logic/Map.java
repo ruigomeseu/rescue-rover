@@ -50,4 +50,11 @@ public class Map {
         return tileMap.isKillingTile(x, y);
     }
 
+    public void setStationaryMoving() {
+        for(MapObject obj: this.objectsMap.getObjects()){
+            if(obj instanceof StationaryRobot){
+                obj.setMoving(true);
+            }
+        }
+    }
 }
