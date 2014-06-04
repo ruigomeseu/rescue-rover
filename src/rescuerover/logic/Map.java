@@ -43,6 +43,13 @@ public class Map {
     }
 
     public boolean isValidMove(int x, int y) {
+        for(MapObject obj: this.objects){
+            if(obj instanceof Robot){
+                if(obj.getX() == x && obj.getY() == y) {
+                    return false;
+                }
+            }
+        }
         return (! tileMap.isTileUnpassable(x, y));
     }
 
@@ -50,11 +57,5 @@ public class Map {
         return tileMap.isKillingTile(x, y);
     }
 
-    public void setStationaryMoving() {
-        for(MapObject obj: this.objectsMap.getObjects()){
-            if(obj instanceof StationaryRobot){
-                obj.setMoving(true);
-            }
-        }
-    }
+
 }

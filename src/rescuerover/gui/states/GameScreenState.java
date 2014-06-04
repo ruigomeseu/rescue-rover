@@ -59,7 +59,7 @@ public class GameScreenState implements ScreenState, Subject {
 
         map.addMapObject(hero);
         map.addMapObject(robot);
-        //map.addMapObject(robot1);
+        map.addMapObject(robot1);
         tileMap.setHero(hero);
         gamePanel.setMap(map);
 

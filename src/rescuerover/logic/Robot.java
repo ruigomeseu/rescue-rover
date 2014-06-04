@@ -17,4 +17,8 @@ public class Robot extends MapObject implements Movable {
     public void step() {
 
     }
+
+    public void fire() {
+        Shot shot = new Shot(this.x, this.y, this.direction);
+    }
 }
