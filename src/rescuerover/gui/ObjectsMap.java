@@ -26,7 +26,6 @@ public class ObjectsMap {
     }
 
     public void draw(Graphics g, Position heroPosition) {
-        this.graph = g;
         for (MapObject obj : objects) {
             if (obj.getX() <= Math.abs(heroPosition.getX() + Constants.VISIBLE_TILES / 2)
                     || obj.getX() >= Math.abs(heroPosition.getX() - Constants.VISIBLE_TILES / 2)) {
