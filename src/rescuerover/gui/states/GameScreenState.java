@@ -1,5 +1,6 @@
 package rescuerover.gui.states;
 
+import com.sun.prism.GraphicsResource;
 import rescuerover.gui.GamePanel;
 import rescuerover.gui.GameThread;
 import rescuerover.gui.MovementKeyListener;
@@ -80,7 +81,7 @@ public class GameScreenState implements ScreenState, Subject {
     }
 
     @Override
-    public void draw(JFrame frame) {
+    public void draw(Graphics g) {
 
     }
 

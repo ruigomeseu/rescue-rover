@@ -16,13 +16,16 @@ public class ScreenStateManager implements Observer {
     JFrame frame;
 
     public ScreenStateManager() {
-        setup();
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    setup();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
-        MenuScreenState menu = MenuScreenState.getInstance(frame);
-        GameScreenState game = GameScreenState.getInstance(frame);
-        game.register(this);
-        menu.register(this);
-        currentState = menu;
     }
 
     /**
@@ -36,18 +39,28 @@ public class ScreenStateManager implements Observer {
         contentPane.setBorder(null);
         frame.setContentPane(contentPane);
         frame.getContentPane().setPreferredSize(new Dimension(800, 600));
+/*
         GridBagLayout gbl_contentPane = new GridBagLayout();
-        gbl_contentPane.columnWidths = new int[] {780, 0};
-        gbl_contentPane.rowHeights = new int[]{580, 0};
+        gbl_contentPane.columnWidths = new int[] {780};
+        gbl_contentPane.rowHeights = new int[]{580};
         gbl_contentPane.columnWeights = new double[]{0.0, 0.0};
         gbl_contentPane.rowWeights = new double[]{0.0, Double.MIN_VALUE};
-        frame.getContentPane().setLayout(gbl_contentPane);
+*/
+        frame.getContentPane().setLayout(new GridBagLayout());
+
+
+        MenuScreenState menu = MenuScreenState.getInstance(frame);
+        GameScreenState game = GameScreenState.getInstance(frame);
+        game.register(this);
+        menu.register(this);
+        currentState = menu;
+
         frame.pack();
         frame.setVisible(true);
     }
 
     public void draw() {
-        currentState.draw(frame);
+     //   currentState.draw(frame);
     }
 
     @Override
