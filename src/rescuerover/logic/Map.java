@@ -53,9 +53,28 @@ public class Map {
         return (! tileMap.isTileUnpassable(x, y));
     }
 
+    public boolean isDogTile(int x, int y){
+        for(MapObject obj: this.objects){
+            if(obj instanceof Dog){
+                if(obj.getX() == x && obj.getY() == y) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
     public boolean isKillingTile(int x, int y) {
         return tileMap.isKillingTile(x, y);
     }
 
 
+    public void setDogWithHero() {
+        for(MapObject obj: this.objects){
+            if(obj instanceof Dog){
+               ((Dog) obj).setWithHero();
+            }
+        }
+    }
 }

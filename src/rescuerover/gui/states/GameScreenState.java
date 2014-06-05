@@ -43,7 +43,7 @@ public class GameScreenState implements ScreenState, Subject {
         // Adds a tile set to load map
         tileMap.setTileSet(tileSet);
         // Set different position to start showing map
-        tileMap.setPosition(6, 6);
+        tileMap.setPosition(-3, -1);
 
         tileMap.setTileDimension(new Dimension(Constants.WIDTH / Constants.VISIBLE_TILES, Constants.HEIGHT / Constants.VISIBLE_TILES));
         tileMap.setShowDimension(new Dimension(Constants.VISIBLE_TILES, Constants.VISIBLE_TILES));
@@ -53,15 +53,15 @@ public class GameScreenState implements ScreenState, Subject {
 
         Map map = new Map(tileMap);
 
-        Hero hero = new Hero(11, 11, Constants.UP, map);
+        Hero hero = new Hero(2, 4, Constants.UP, map);
         StationaryRobot robot = new StationaryRobot(10,10,Constants.RIGHT);
-        StationaryRobot robot1 = new StationaryRobot(9,10,Constants.RIGHT);
-        StationaryRobot robot2 = new StationaryRobot(8,9,Constants.RIGHT);
+        StationaryRobot robot1 = new StationaryRobot(9,9,Constants.RIGHT);
+        Dog dog = new Dog(27,27, Constants.LEFT);
 
         map.addMapObject(hero);
         map.addMapObject(robot);
         map.addMapObject(robot1);
-        map.addMapObject(robot2);
+        map.addMapObject(dog);
         tileMap.setHero(hero);
         gamePanel.setMap(map);
 

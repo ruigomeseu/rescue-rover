@@ -7,6 +7,7 @@ public class Hero extends MapObject implements Movable {
     private int framesPerMovement;
     private int framesLeft;
     private boolean alive;
+    private int xInit, yInit;
 
     public Hero(int x, int y, int direction, Map map) {
         super(x, y, direction);
@@ -14,6 +15,8 @@ public class Hero extends MapObject implements Movable {
         framesPerMovement = 6;
         sprite = new Sprite(9, 5, 32, "/hero.png");
         alive = true;
+        this.xInit = x;
+        this.yInit = y;
     }
 
     public void move(int direction) {
@@ -24,6 +27,9 @@ public class Hero extends MapObject implements Movable {
                     this.moving = true;
                     if (map.isKillingTile(this.x, this.y - 1)) {
                         this.alive = false;
+                    }
+                    if(map.isDogTile(this.x, this.y - 1)){
+                        catchDog();
                     }
                     sprite.setLimits(10, 15);
                     sprite.setFrameNumber(10);
@@ -39,6 +45,10 @@ public class Hero extends MapObject implements Movable {
                     if (map.isKillingTile(this.x + 1, this.y)) {
                         this.alive = false;
                     }
+                    if(map.isDogTile(this.x + 1, this.y)){
+                        catchDog();
+                        map.setDogWithHero();
+                    }
                     sprite.setLimits(19, 24);
                     sprite.setFrameNumber(19);
                 } else {
@@ -53,6 +63,10 @@ public class Hero extends MapObject implements Movable {
                     if (map.isKillingTile(this.x, this.y + 1)) {
                         this.alive = false;
                     }
+                    if(map.isDogTile(this.x, this.y + 1)){
+                        catchDog();
+                        map.setDogWithHero();
+                    }
                     sprite.setLimits(3, 8);
                     sprite.setFrameNumber(3);
                 } else {
@@ -66,6 +80,11 @@ public class Hero extends MapObject implements Movable {
                     if (map.isKillingTile(this.x - 1, this.y)) {
                         this.alive = false;
                     }
+                    if(map.isDogTile(this.x - 1, this.y)){
+                        catchDog();
+                        map.setDogWithHero();
+                    }
+                    System.out.println("Has dog: " + this.hasDog());
                     sprite.setLimits(28, 33);
                     sprite.setFrameNumber(28);
                 } else {
@@ -146,6 +165,13 @@ public class Hero extends MapObject implements Movable {
 
     public void catchDog() {
         this.hasDog = true;
+    }
+
+    public boolean isAtEnd(){
+        if(this.hasDog() && this.x == xInit && this.y == yInit){
+            return true;
+        }
+        return false;
     }
 
 }

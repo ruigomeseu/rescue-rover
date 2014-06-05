@@ -1,5 +1,6 @@
 package rescuerover.gui;
 
+import com.sun.corba.se.impl.orbutil.graph.Graph;
 import rescuerover.logic.*;
 import rescuerover.logic.Robot;
 
@@ -25,6 +26,7 @@ public class ObjectsMap {
     }
 
     public void draw(Graphics g, Position heroPosition) {
+        this.graph = g;
         for (MapObject obj : objects) {
             if (obj.getX() <= Math.abs(heroPosition.getX() + Constants.VISIBLE_TILES / 2)
                     || obj.getX() >= Math.abs(heroPosition.getX() - Constants.VISIBLE_TILES / 2)) {
@@ -51,7 +53,11 @@ public class ObjectsMap {
                     }
                 } else if (obj instanceof StationaryRobot) {
                     drawStationaryRobots(g, obj, hero);
-                    obj.step();
+                }
+                else if(obj instanceof Dog){
+                    if(! (((Dog) obj).getWithHero())){
+                        drawStationaryRobots(g, obj, hero);
+                    }
                 }
 
                 if (obj.isMoving())
@@ -59,6 +65,8 @@ public class ObjectsMap {
             }
         }
     }
+
+
 
     public void drawStationaryRobots(Graphics g, MapObject obj, MapObject hero) {
         long offsetIntegerX = (long) hero.getX();
