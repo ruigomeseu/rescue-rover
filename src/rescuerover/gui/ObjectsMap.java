@@ -9,12 +9,16 @@ public class ObjectsMap {
     private Dimension tileDimension;
     private ArrayList<MapObject> objects;
     private MapObject hero;
+    private MapObject currentObject;
+    private Graphics graph;
     private int iter = 0;
 
     public ObjectsMap(ArrayList<MapObject> objects, Dimension tileDimension) {
         this.objects = objects;
         this.tileDimension = tileDimension;
         this.hero = null;
+        this.currentObject = null;
+        this.graph = null;
     }
 
     public ArrayList<MapObject> getObjects() {
@@ -22,6 +26,7 @@ public class ObjectsMap {
     }
 
     public void draw(Graphics g, Position heroPosition) {
+        this.graph = g;
         for (MapObject obj : objects) {
             if (obj.getX() <= Math.abs(heroPosition.getX() + Constants.VISIBLE_TILES / 2)
                     || obj.getX() >= Math.abs(heroPosition.getX() - Constants.VISIBLE_TILES / 2)) {
@@ -37,10 +42,9 @@ public class ObjectsMap {
                             null);
                 } else if (obj instanceof StationaryRobot) {
                     drawStationaryRobots(g, obj, hero);
-                    obj.step();
                 }
 
-                System.out.println("Hero frame = " + obj.getSprite().getFrameNumber());
+                //System.out.println("Hero frame = " + obj.getSprite().getFrameNumber());
                 if (obj.isMoving())
                     obj.step();
             }

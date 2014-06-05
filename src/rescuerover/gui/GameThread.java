@@ -17,7 +17,7 @@ public class GameThread extends Thread implements Runnable {
 
     @Override
     public void run() {
-        while(hero.isAlive() || hero.isMoving()) {
+        while((hero.isAlive() || hero.isMoving()) && !hero.isAtEnd()) {
             gamePanel.repaint();
             try {
                 Thread.sleep(50);
