@@ -47,6 +47,7 @@ public class Hero extends MapObject implements Movable {
                     }
                     if(map.isDogTile(this.x + 1, this.y)){
                         catchDog();
+                        map.setDogWithHero();
                     }
                     sprite.setLimits(19, 24);
                     sprite.setFrameNumber(19);
@@ -64,6 +65,7 @@ public class Hero extends MapObject implements Movable {
                     }
                     if(map.isDogTile(this.x, this.y + 1)){
                         catchDog();
+                        map.setDogWithHero();
                     }
                     sprite.setLimits(3, 8);
                     sprite.setFrameNumber(3);
@@ -80,6 +82,7 @@ public class Hero extends MapObject implements Movable {
                     }
                     if(map.isDogTile(this.x - 1, this.y)){
                         catchDog();
+                        map.setDogWithHero();
                     }
                     System.out.println("Has dog: " + this.hasDog());
                     sprite.setLimits(28, 33);

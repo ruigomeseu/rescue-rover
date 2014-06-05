@@ -1,5 +1,6 @@
 package rescuerover.gui;
 
+import com.sun.corba.se.impl.orbutil.graph.Graph;
 import rescuerover.logic.*;
 
 import java.awt.*;
@@ -43,13 +44,19 @@ public class ObjectsMap {
                 } else if (obj instanceof StationaryRobot) {
                     drawStationaryRobots(g, obj, hero);
                 }
+                else if(obj instanceof Dog){
+                    if(! (((Dog) obj).getWithHero())){
+                        drawStationaryRobots(g, obj, hero);
+                    }
+                }
 
-                //System.out.println("Hero frame = " + obj.getSprite().getFrameNumber());
                 if (obj.isMoving())
                     obj.step();
             }
         }
     }
+
+
 
     public void drawStationaryRobots(Graphics g, MapObject obj, MapObject hero) {
         long offsetIntegerX = (long) hero.getX();
@@ -60,9 +67,6 @@ public class ObjectsMap {
 
         int deltaHeroX = obj.getX() - hero.getX();
         int deltaHeroY = obj.getY() - hero.getY();
-
-        System.out.println("offsetDecimalX: " + offsetDecimalX);
-        System.out.println("offsetDecimalY: " + offsetDecimalY);
         double lastStepX = 0;
         double lastStepY = 0;
 
@@ -81,9 +85,7 @@ public class ObjectsMap {
         }
 
         if (offsetDecimalX != 0 || offsetDecimalY != 0) {
-            System.out.println("I'm here");
             iter = 0;
-            System.out.println("Iter: " + iter);
             g.drawImage(
                     obj.getSprite().getFrame(),
                     (int) Math.round((((Constants.VISIBLE_TILES / 2) + deltaHeroX) + lastStepX) * tileDimension.getWidth()),
@@ -93,7 +95,6 @@ public class ObjectsMap {
                     null);
         } else {
             if (iter != 0) {
-                System.out.println("x != 0");
                 g.drawImage(
                         obj.getSprite().getFrame(),
                         (int) Math.round(((Constants.VISIBLE_TILES / 2) + deltaHeroX + lastStepX) * (int) tileDimension.getWidth()),
@@ -117,7 +118,6 @@ public class ObjectsMap {
                     lastX = deltaHeroX;
                     lastY = (obj.getY() - hero.getOffsetY() - 1 / 6.0);
                 }
-                System.out.println("LASTTTTTTTTT");
                 g.drawImage(
                         obj.getSprite().getFrame(),
                         (int) Math.round(((Constants.VISIBLE_TILES / 2) + lastX) * (int) tileDimension.getWidth()),

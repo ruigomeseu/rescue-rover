@@ -70,4 +70,11 @@ public class Map {
     }
 
 
+    public void setDogWithHero() {
+        for(MapObject obj: this.objects){
+            if(obj instanceof Dog){
+               ((Dog) obj).setWithHero();
+            }
+        }
+    }
 }
