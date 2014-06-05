@@ -45,7 +45,7 @@ public class ObjectsMap {
                             (int) tileDimension.getWidth(),
                             (int) tileDimension.getHeight(),
                             null);
-                    if (Math.abs(Double.parseDouble(new DecimalFormat("#.#").format(offsetDecimalX))) == 0.8 || Math.abs(Double.parseDouble(new DecimalFormat("#.#").format(offsetDecimalY))) == 0.8) {
+                    if (Math.abs((int) (offsetDecimalX * 10)) == 8 || Math.abs((int) (offsetDecimalY * 10)) == 8) {
                         lastStep = true;
                     } else {
                         lastStep = false;
