@@ -8,7 +8,6 @@ public class RescueRover {
 
     public RescueRover() {
         stateManager = new ScreenStateManager();
-
         stateManager.draw();
     }
 

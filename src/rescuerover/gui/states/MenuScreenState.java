@@ -1,13 +1,19 @@
 package rescuerover.gui.states;
 
+import rescuerover.gui.GamePanel;
+import rescuerover.gui.MenuPanel;
 import rescuerover.logic.Observer;
 import rescuerover.logic.ScreenState;
 import rescuerover.logic.Subject;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class MenuScreenState implements ScreenState, Subject {
@@ -21,38 +27,38 @@ public class MenuScreenState implements ScreenState, Subject {
 
     protected MenuScreenState(JFrame frame) {
         this.frame = frame;
-        panel = new JPanel();
+        panel = new MenuPanel(this);
         panel.setLayout(new GridBagLayout());
-        frame.add(panel);
+
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
-        gbc.weightx=0;
-        gbc.weighty=0;
+        gbc.weightx = 1;
+        gbc.weighty = 1;
         gbc.fill = GridBagConstraints.BOTH;
         gbc.anchor = GridBagConstraints.EAST;
 
-        JButton exitButton = new JButton("Play");
+        panel.setFocusable(true);
+        frame.getContentPane().add(panel, gbc);
 
-        panel.add(exitButton, gbc);
-        exitButton.addActionListener(new playListener());
 
         frame.repaint();
 
     }
 
     public static MenuScreenState getInstance(JFrame frame) {
-        if(instance == null) {
+        if (instance == null) {
             instance = new MenuScreenState(frame);
         }
         return instance;
     }
 
     @Override
-    public void draw(JFrame frame) {
+    public void draw(Graphics g) {
 
     }
+
 
     @Override
     public void onEnter() {
@@ -82,6 +88,14 @@ public class MenuScreenState implements ScreenState, Subject {
         for (Observer ob : observers) {
             ob.update(nextState);
         }
+    }
+
+    public void setNextState(ScreenState state){
+        nextState = state;
+    }
+
+    public JFrame getFrame() {
+        return this.frame;
     }
 
     private class playListener implements ActionListener {
