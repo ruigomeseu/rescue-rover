@@ -1,14 +1,16 @@
 package rescuerover.gui.states;
 
-import com.sun.prism.GraphicsResource;
 import rescuerover.gui.GamePanel;
 import rescuerover.gui.GameThread;
 import rescuerover.gui.MovementKeyListener;
 import rescuerover.gui.TileMap;
 import rescuerover.logic.*;
 
+import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 
 public class GameScreenState implements ScreenState, Subject {
@@ -28,6 +30,7 @@ public class GameScreenState implements ScreenState, Subject {
     Dog dog;
     Key realKey, fakeKey, fakeKey1;
     Gate gate;
+    Clip clip;
 
     protected GameScreenState(JFrame frame) {
         this.frame = frame;
@@ -106,6 +109,7 @@ public class GameScreenState implements ScreenState, Subject {
 
     @Override
     public void onEnter() {
+        playSound();
         gameThread = new GameThread(gamePanel, hero);
         gameThread.start();
         panel.setVisible(true);
@@ -122,6 +126,7 @@ public class GameScreenState implements ScreenState, Subject {
         gamePanel.requestFocus(false);
         gamePanel.setVisible(false);
         resetGameState();
+        clip.stop();
     }
 
     private void resetGameState() {
@@ -153,5 +158,30 @@ public class GameScreenState implements ScreenState, Subject {
 
     public void setNextState(ScreenState state){
         nextState = state;
+    }
+
+    private void playSound()
+    {
+        try {
+            // Open an audio input stream.
+            URL url = this.getClass().getClassLoader().getResource("sounds/back.mid");
+            AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
+            // Get a sound clip resource.
+            clip = AudioSystem.getClip();
+
+            // Open audio clip and load samples from the audio input stream.
+            clip.open(audioIn);
+
+            FloatControl volume = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+            volume.setValue(-5);
+            //clip.start();
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+        } catch (UnsupportedAudioFileException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (LineUnavailableException e) {
+            e.printStackTrace();
+        }
     }
 }

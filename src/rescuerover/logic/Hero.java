@@ -1,5 +1,9 @@
 package rescuerover.logic;
 
+import javax.sound.sampled.*;
+import java.io.IOException;
+import java.net.URL;
+
 public class Hero extends MapObject implements Movable {
 
     private Map map;
@@ -39,8 +43,7 @@ public class Hero extends MapObject implements Movable {
                             dropKey();
 
                         getKey(this.x, this.y - 1);
-                    }
-                    else if(this.hasKey){
+                    } else if (this.hasKey) {
                         this.key.decY();
                     }
 
@@ -65,8 +68,7 @@ public class Hero extends MapObject implements Movable {
                             dropKey();
 
                         getKey(this.x + 1, this.y);
-                    }
-                    else if(this.hasKey){
+                    } else if (this.hasKey) {
                         this.key.incX();
                     }
                     sprite.setLimits(19, 24);
@@ -113,11 +115,9 @@ public class Hero extends MapObject implements Movable {
                             dropKey();
 
                         getKey(this.x - 1, this.y);
-                    }
-                    else if(this.hasKey){
+                    } else if (this.hasKey) {
                         this.key.decX();
                     }
-                    System.out.println("Has dog: " + this.hasDog());
                     sprite.setLimits(28, 33);
                     sprite.setFrameNumber(28);
                 } else {
@@ -136,9 +136,36 @@ public class Hero extends MapObject implements Movable {
                     this.key = (Key) obj;
                     ((Key) obj).setWithHero(true);
                     this.hasKey = true;
+                    playSound();
                 }
             }
         }
+    }
+
+    private void playSound() {
+
+        URL url;
+        try {
+            // Open an audio input stream.
+
+            url = this.getClass().getClassLoader().getResource("sounds/item.mid");
+
+            AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
+            // Get a sound clip resource.
+            Clip clip = AudioSystem.getClip();
+
+            // Open audio clip and load samples from the audio input stream.
+            clip.open(audioIn);
+            //clip.start();
+            clip.start();
+        } catch (UnsupportedAudioFileException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (LineUnavailableException e) {
+            e.printStackTrace();
+        }
+
     }
 
     private void dropKey() {

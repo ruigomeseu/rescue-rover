@@ -6,8 +6,11 @@ import rescuerover.logic.Observer;
 import rescuerover.logic.ScreenState;
 import rescuerover.logic.Subject;
 
+import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 
 
@@ -17,6 +20,7 @@ public class WonGameScreenState implements ScreenState, Subject {
     JFrame frame;
     private ArrayList<Observer> observers = new ArrayList<Observer>();
     ScreenState nextState;
+    Clip clip;
 
     private static WonGameScreenState instance = null;
 
@@ -55,7 +59,7 @@ public class WonGameScreenState implements ScreenState, Subject {
 
     @Override
     public void onEnter() {
-        System.out.println("TA NO ENTER DO WON");
+        playSound();
         panel.setVisible(true);
         panel.setFocusable(true);
         panel.requestFocus();
@@ -66,6 +70,7 @@ public class WonGameScreenState implements ScreenState, Subject {
     public void onExit() {
         panel.setVisible(false);
         panel.setFocusable(false);
+        clip.stop();
     }
 
     @Override
@@ -92,5 +97,31 @@ public class WonGameScreenState implements ScreenState, Subject {
 
     public JFrame getFrame() {
         return this.frame;
+    }
+
+    private void playSound() {
+
+        URL url;
+        try {
+            // Open an audio input stream.
+
+            url = this.getClass().getClassLoader().getResource("sounds/win.mid");
+
+            AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
+            // Get a sound clip resource.
+            clip = AudioSystem.getClip();
+
+            // Open audio clip and load samples from the audio input stream.
+            clip.open(audioIn);
+            //clip.start();
+            clip.start();
+        } catch (UnsupportedAudioFileException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (LineUnavailableException e) {
+            e.printStackTrace();
+        }
+
     }
 }
