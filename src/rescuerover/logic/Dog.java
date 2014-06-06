@@ -6,7 +6,7 @@ public class Dog extends MapObject {
     public Dog(int x, int y, int direction) {
         super(x, y, direction);
         withHero = false;
-        sprite = new Sprite(1, 1, 32, "/dog.png");
+        sprite = new Sprite(1, 1, 32, "/sprites/dog.png");
     }
 
     public void setWithHero() {

@@ -23,7 +23,6 @@ public class MenuPanel extends JPanel {
     protected void paintComponent(Graphics g) {
         BufferedImage menuImage = null;
 
-        System.out.println("image: " + image);
         switch (image) {
             case 1:
                 try {

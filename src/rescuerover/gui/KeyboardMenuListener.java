@@ -45,15 +45,6 @@ public class KeyboardMenuListener implements KeyListener {
                 break;
             case KeyEvent.VK_RIGHT:
                 if (panel.image == 1) {
-                    System.out.println("HERE");
-                    System.out.println("HERE");
-                    System.out.println("HERE");
-                    System.out.println("HERE");
-                    System.out.println("HERE");
-                    System.out.println("HERE");
-                    System.out.println("HERE");
-                    System.out.println("HERE");
-                    System.out.println("HERE");
                     panel.image = 2;
                 } else if (panel.image == 3) {
                     panel.image = 4;

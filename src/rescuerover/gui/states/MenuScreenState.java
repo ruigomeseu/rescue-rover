@@ -30,7 +30,6 @@ public class MenuScreenState implements ScreenState, Subject {
         panel = new MenuPanel(this);
         panel.setLayout(new GridBagLayout());
 
-
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -41,7 +40,6 @@ public class MenuScreenState implements ScreenState, Subject {
 
         panel.setFocusable(true);
         frame.getContentPane().add(panel, gbc);
-
 
         frame.repaint();
 

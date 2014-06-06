@@ -13,7 +13,7 @@ public class Hero extends MapObject implements Movable {
         super(x, y, direction);
         this.map = map;
         framesPerMovement = 6;
-        sprite = new Sprite(9, 5, 32, "/hero.png");
+        sprite = new Sprite(9, 5, 32, "/sprites/hero.png");
         alive = true;
         this.xInit = x;
         this.yInit = y;

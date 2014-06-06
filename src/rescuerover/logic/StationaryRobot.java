@@ -9,7 +9,7 @@ public class StationaryRobot extends Robot {
 
     public StationaryRobot(int x, int y, int direction) {
         super(x, y, direction);
-        sprite = new Sprite(12, 4, 32, "/robot.png");
+        sprite = new Sprite(12, 4, 32, "/sprites/robot.png");
         this.time = 0;
     }
 
