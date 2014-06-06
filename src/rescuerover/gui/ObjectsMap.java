@@ -58,6 +58,16 @@ public class ObjectsMap {
                         drawStationaryRobots(g, obj, hero);
                     }
                 }
+                else if(obj instanceof Key) {
+                    if(! ((Key) obj).getWithHero()) {
+                        drawStationaryRobots(g, obj, hero);
+                    }
+                }
+                else if(obj instanceof Gate) {
+                    if(! ((Gate) obj).getActive()) {
+                        drawStationaryRobots(g, obj, hero);
+                    }
+                }
 
                 if (obj.isMoving())
                     obj.step();

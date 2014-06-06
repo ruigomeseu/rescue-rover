@@ -26,6 +26,8 @@ public class GameScreenState implements ScreenState, Subject {
     Map map;
     StationaryRobot robot, robot1;
     Dog dog;
+    Key realKey, fakeKey, fakeKey1;
+    Gate gate;
 
     protected GameScreenState(JFrame frame) {
         this.frame = frame;
@@ -70,12 +72,20 @@ public class GameScreenState implements ScreenState, Subject {
         hero = new Hero(2, 4, Constants.UP, map);
         robot = new StationaryRobot(10,10,Constants.RIGHT);
         robot1 = new StationaryRobot(8,8,Constants.RIGHT);
-        dog = new Dog(9,9, Constants.LEFT);
+        dog = new Dog(28,23, Constants.LEFT);
+        realKey = new Key(27,27,Constants.RIGHT, "real");
+        fakeKey = new Key(20,20,Constants.RIGHT, "fake");
+        fakeKey1 = new Key(3,22,Constants.RIGHT, "fake");
+        gate = new Gate(24,23,Constants.RIGHT);
 
         map.addMapObject(hero);
         map.addMapObject(robot);
         map.addMapObject(robot1);
         map.addMapObject(dog);
+        map.addMapObject(realKey);
+        map.addMapObject(fakeKey);
+        map.addMapObject(fakeKey1);
+        map.addMapObject(gate);
         tileMap.setHero(hero);
         gamePanel.setMap(map);
 

@@ -8,6 +8,8 @@ public class Hero extends MapObject implements Movable {
     private int framesLeft;
     private boolean alive;
     private int xInit, yInit;
+    private Key key;
+    private boolean hasKey;
 
     public Hero(int x, int y, int direction, Map map) {
         super(x, y, direction);
@@ -17,6 +19,8 @@ public class Hero extends MapObject implements Movable {
         alive = true;
         this.xInit = x;
         this.yInit = y;
+        this.key = null;
+        this.hasKey = false;
     }
 
     public void move(int direction) {
@@ -27,11 +31,19 @@ public class Hero extends MapObject implements Movable {
                     this.moving = true;
                     if (map.isKillingTile(this.x, this.y - 1)) {
                         this.alive = false;
-                    }
-                    if(map.isDogTile(this.x, this.y - 1)){
+                    } else if (map.isDogTile(this.x, this.y - 1)) {
                         catchDog();
                         map.setDogWithHero();
+                    } else if (map.isKeyTile(this.x, this.y - 1)) {
+                        if (this.hasKey())
+                            dropKey();
+
+                        getKey(this.x, this.y - 1);
                     }
+                    else if(this.hasKey){
+                        this.key.decY();
+                    }
+
                     sprite.setLimits(10, 15);
                     sprite.setFrameNumber(10);
 
@@ -45,10 +57,17 @@ public class Hero extends MapObject implements Movable {
                     this.direction = Constants.RIGHT;
                     if (map.isKillingTile(this.x + 1, this.y)) {
                         this.alive = false;
-                    }
-                    if(map.isDogTile(this.x + 1, this.y)){
+                    } else if (map.isDogTile(this.x + 1, this.y)) {
                         catchDog();
                         map.setDogWithHero();
+                    } else if (map.isKeyTile(this.x + 1, this.y)) {
+                        if (this.hasKey())
+                            dropKey();
+
+                        getKey(this.x + 1, this.y);
+                    }
+                    else if(this.hasKey){
+                        this.key.incX();
                     }
                     sprite.setLimits(19, 24);
                     sprite.setFrameNumber(19);
@@ -63,10 +82,16 @@ public class Hero extends MapObject implements Movable {
                     this.direction = Constants.DOWN;
                     if (map.isKillingTile(this.x, this.y + 1)) {
                         this.alive = false;
-                    }
-                    if(map.isDogTile(this.x, this.y + 1)){
+                    } else if (map.isDogTile(this.x, this.y + 1)) {
                         catchDog();
                         map.setDogWithHero();
+                    } else if (map.isKeyTile(this.x, this.y + 1)) {
+                        if (this.hasKey())
+                            dropKey();
+
+                        getKey(this.x, this.y + 1);
+                    } else if (this.hasKey) {
+                        this.key.incY();
                     }
                     sprite.setLimits(3, 8);
                     sprite.setFrameNumber(3);
@@ -80,10 +105,17 @@ public class Hero extends MapObject implements Movable {
                     this.direction = Constants.LEFT;
                     if (map.isKillingTile(this.x - 1, this.y)) {
                         this.alive = false;
-                    }
-                    if(map.isDogTile(this.x - 1, this.y)){
+                    } else if (map.isDogTile(this.x - 1, this.y)) {
                         catchDog();
                         map.setDogWithHero();
+                    } else if (map.isKeyTile(this.x - 1, this.y)) {
+                        if (this.hasKey())
+                            dropKey();
+
+                        getKey(this.x - 1, this.y);
+                    }
+                    else if(this.hasKey){
+                        this.key.decX();
                     }
                     System.out.println("Has dog: " + this.hasDog());
                     sprite.setLimits(28, 33);
@@ -95,6 +127,24 @@ public class Hero extends MapObject implements Movable {
             default:
                 break;
         }
+    }
+
+    private void getKey(int x, int y) {
+        for (MapObject obj : this.map.objectsMap.getObjects()) {
+            if (obj instanceof Key) {
+                if (obj.getX() == x && obj.getY() == y) {
+                    this.key = (Key) obj;
+                    ((Key) obj).setWithHero(true);
+                    this.hasKey = true;
+                }
+            }
+        }
+    }
+
+    private void dropKey() {
+        this.key.setWithHero(false);
+        this.key = null;
+        this.hasKey = false;
     }
 
     public boolean isAlive() {
@@ -112,6 +162,7 @@ public class Hero extends MapObject implements Movable {
                     this.offsetY -= 1 / (double) framesPerMovement;
                 } else {
                     this.decY();
+
                     this.offsetY = this.getY();
                     sprite.setFrameNumber(9);
                     map.tileMap.setPosition(
@@ -124,6 +175,7 @@ public class Hero extends MapObject implements Movable {
                     this.offsetX += 1 / (double) framesPerMovement;
                 } else {
                     this.incX();
+
                     this.offsetX = this.getX();
                     sprite.setFrameNumber(16);
                     map.tileMap.setPosition(
@@ -136,6 +188,7 @@ public class Hero extends MapObject implements Movable {
                     this.offsetY += 1 / (double) framesPerMovement;
                 } else {
                     this.incY();
+
                     this.offsetY = this.getY();
                     sprite.setFrameNumber(1);
                     map.tileMap.setPosition(
@@ -148,6 +201,7 @@ public class Hero extends MapObject implements Movable {
                     this.offsetX -= 1 / (double) framesPerMovement;
                 } else {
                     this.decX();
+
                     this.offsetX = this.getX();
                     sprite.setFrameNumber(25);
                     map.tileMap.setPosition(
@@ -168,14 +222,18 @@ public class Hero extends MapObject implements Movable {
         this.hasDog = true;
     }
 
-    public boolean isAtEnd(){
-        if(this.hasDog() && this.x == xInit && this.y == yInit){
+    public boolean isAtEnd() {
+        if (this.hasDog() && this.x == xInit && this.y == yInit) {
             return true;
         }
         return false;
     }
 
-    public void dropDog() {
-        this.hasDog = false;
+    public boolean hasKey() {
+        return hasKey;
+    }
+
+    public Key getKey() {
+        return key;
     }
 }

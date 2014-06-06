@@ -43,11 +43,25 @@ public class Map {
     }
 
     public boolean isValidMove(int x, int y) {
+        Hero hero = (Hero) this.objects.get(0);
         for(MapObject obj: this.objects){
             if(obj instanceof Robot){
                 if(obj.getX() == x && obj.getY() == y) {
                     return false;
                 }
+            }
+            else if(obj instanceof Gate) {
+                if(obj.getX() == x && obj.getY() == y) {
+                    if(hero.hasKey()){
+                        if(hero.getKey().getType() == "real") {
+                            ((Gate) obj).open();
+                            return true;
+                        }
+                        return false;
+                    }
+                    else return false;
+                }
+
             }
         }
         return (! tileMap.isTileUnpassable(x, y));
@@ -76,5 +90,18 @@ public class Map {
                ((Dog) obj).setWithHero();
             }
         }
+    }
+
+    public boolean isKeyTile(int x, int y) {
+
+        for(MapObject obj: this.objects){
+            if(obj instanceof Key){
+                if(obj.getX() == x && obj.getY() == y) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 }
