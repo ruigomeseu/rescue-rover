@@ -17,3 +17,4 @@ This was originally developed by [Rui Gomes](http://www.github.com/ruigomeseu) a
 
 ####Sprites
 * Crono, from Chrono Trigger by Square - Downloaded at [The Spriters Resource](http://www.spriters-resource.com/snes/chronotrigger/sheet/2514/)
+* Stairs, from Pokemon Emerald by

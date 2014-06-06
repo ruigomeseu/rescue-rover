@@ -39,6 +39,7 @@ public class MenuScreenState implements ScreenState, Subject {
         exitButton.addActionListener(new playListener());
 
         frame.repaint();
+
     }
 
     public static MenuScreenState getInstance(JFrame frame) {

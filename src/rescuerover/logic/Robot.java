@@ -7,7 +7,6 @@ public class Robot extends MapObject implements Movable {
     public Robot(int x, int y, int direction) {
         super(x, y, direction);
         alive = true;
-        lastStep = false;
     }
 
     @Override

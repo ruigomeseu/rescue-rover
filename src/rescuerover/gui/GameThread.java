@@ -27,17 +27,20 @@ public class GameThread extends Thread implements Runnable {
         }
 
         /**
-         * Display death animation
+         * If the hero died, show the
+         * death animation
          */
-        hero.getSprite().setLimits(34, 40);
-        hero.getSprite().setFrameNumber(34);
-        for(int i = 0; i < 6; i++) {
-            hero.getSprite().incrementFrameNumber();
-            gamePanel.repaint();
-            try {
-                Thread.sleep(250);
-            } catch(Exception e) {
-                System.out.println("Exception at Thread Sleep: " + e);
+        if(hero.isAlive()) {
+            hero.getSprite().setLimits(34, 40);
+            hero.getSprite().setFrameNumber(34);
+            for (int i = 0; i < 6; i++) {
+                hero.getSprite().incrementFrameNumber();
+                gamePanel.repaint();
+                try {
+                    Thread.sleep(250);
+                } catch (Exception e) {
+                    System.out.println("Exception at Thread Sleep: " + e);
+                }
             }
         }
 
