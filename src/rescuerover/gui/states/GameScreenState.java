@@ -18,29 +18,42 @@ public class GameScreenState implements ScreenState, Subject {
     ScreenState nextState;
     JPanel panel;
     GamePanel gamePanel;
+    JFrame frame;
+    GameThread gameThread;
+    Hero hero;
+    TileSet tileSet;
+    TileMap tileMap;
+    Map map;
+    StationaryRobot robot, robot1;
+    Dog dog;
 
     protected GameScreenState(JFrame frame) {
+        this.frame = frame;
         panel = new JPanel();
         panel.setLayout(new GridBagLayout());
         panel.setVisible(false);
         frame.add(panel);
 
+        setup();
+    }
+
+    public void setup() {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.anchor = GridBagConstraints.CENTER;
 
-        gamePanel = new GamePanel(new Dimension(Constants.WIDTH, Constants.HEIGHT));
+        gamePanel = new GamePanel(new Dimension(Constants.WIDTH, Constants.HEIGHT), this);
 
         panel.add(gamePanel, gbc);
 
-        TileSet tileSet = new TileSet(32, 25, 18, "/tileset.png");
+        tileSet = new TileSet(32, 25, 18, "/tileset.png");
         // loads tiles -> no blocks
         tileSet.loadTile();
         tileSet.loadTilesProperties("/tileproperties", ",");
 
-        TileMap tileMap = new TileMap(new Dimension(30,30), "/map");
+        tileMap = new TileMap(new Dimension(30,30), "/map");
         // Adds a tile set to load map
         tileMap.setTileSet(tileSet);
         // Set different position to start showing map
@@ -52,12 +65,12 @@ public class GameScreenState implements ScreenState, Subject {
         // loads the map from map file
         tileMap.loadMap(0, ",");
 
-        Map map = new Map(tileMap);
+        map = new Map(tileMap);
 
-        Hero hero = new Hero(2, 4, Constants.UP, map);
-        StationaryRobot robot = new StationaryRobot(10,10,Constants.RIGHT);
-        StationaryRobot robot1 = new StationaryRobot(9,9,Constants.RIGHT);
-        Dog dog = new Dog(27,27, Constants.LEFT);
+        hero = new Hero(2, 4, Constants.UP, map);
+        robot = new StationaryRobot(10,10,Constants.RIGHT);
+        robot1 = new StationaryRobot(8,8,Constants.RIGHT);
+        dog = new Dog(9,9, Constants.LEFT);
 
         map.addMapObject(hero);
         map.addMapObject(robot);
@@ -67,10 +80,6 @@ public class GameScreenState implements ScreenState, Subject {
         gamePanel.setMap(map);
 
         gamePanel.addKeyListener(new MovementKeyListener(hero));
-
-        GameThread gameThread = new GameThread(gamePanel, hero);
-
-        gameThread.start();
     }
 
     public static GameScreenState getInstance(JFrame frame) {
@@ -87,10 +96,12 @@ public class GameScreenState implements ScreenState, Subject {
 
     @Override
     public void onEnter() {
+        gameThread = new GameThread(gamePanel, hero);
+        gameThread.start();
         panel.setVisible(true);
         panel.setFocusable(false);
         gamePanel.setFocusable(true);
-        gamePanel.requestFocus(true);
+        gamePanel.requestFocus();
         panel.revalidate();
     }
 
@@ -98,6 +109,13 @@ public class GameScreenState implements ScreenState, Subject {
     public void onExit() {
         panel.setVisible(false);
         panel.setFocusable(false);
+        gamePanel.requestFocus(false);
+        gamePanel.setVisible(false);
+        resetGameState();
+    }
+
+    private void resetGameState() {
+        setup();
     }
 
     @Override
@@ -114,7 +132,16 @@ public class GameScreenState implements ScreenState, Subject {
     public void notifyObservers() {
         for (Observer ob : observers) {
             System.out.println("Notifying Observers..");
+            System.out.println("Next state: " + nextState.getClass().getName());
             ob.update(nextState);
         }
+    }
+
+    public JFrame getFrame() {
+        return this.frame;
+    }
+
+    public void setNextState(ScreenState state){
+        nextState = state;
     }
 }

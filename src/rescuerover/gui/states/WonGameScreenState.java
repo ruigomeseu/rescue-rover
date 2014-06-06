@@ -1,34 +1,31 @@
 package rescuerover.gui.states;
 
-import rescuerover.gui.GamePanel;
 import rescuerover.gui.MenuPanel;
+import rescuerover.gui.WonGamePanel;
 import rescuerover.logic.Observer;
 import rescuerover.logic.ScreenState;
 import rescuerover.logic.Subject;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
-public class MenuScreenState implements ScreenState, Subject {
+
+public class WonGameScreenState implements ScreenState, Subject {
 
     JPanel panel;
     JFrame frame;
     private ArrayList<Observer> observers = new ArrayList<Observer>();
     ScreenState nextState;
 
-    private static MenuScreenState instance = null;
+    private static WonGameScreenState instance = null;
 
-    protected MenuScreenState(JFrame frame) {
+    protected WonGameScreenState(JFrame frame) {
         this.frame = frame;
-        panel = new MenuPanel(this);
+        panel = new WonGamePanel(this);
         panel.setLayout(new GridBagLayout());
+
+        panel.setVisible(false);
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
@@ -45,21 +42,20 @@ public class MenuScreenState implements ScreenState, Subject {
 
     }
 
-    public static MenuScreenState getInstance(JFrame frame) {
+    public static WonGameScreenState getInstance(JFrame frame) {
         if (instance == null) {
-            instance = new MenuScreenState(frame);
+            instance = new WonGameScreenState(frame);
         }
         return instance;
     }
-
     @Override
     public void draw(Graphics g) {
 
     }
 
-
     @Override
     public void onEnter() {
+        System.out.println("TA NO ENTER DO WON");
         panel.setVisible(true);
         panel.setFocusable(true);
         panel.requestFocus();
@@ -70,7 +66,6 @@ public class MenuScreenState implements ScreenState, Subject {
     public void onExit() {
         panel.setVisible(false);
         panel.setFocusable(false);
-        panel.requestFocus(false);
     }
 
     @Override
@@ -81,6 +76,7 @@ public class MenuScreenState implements ScreenState, Subject {
     @Override
     public void unregister(Observer obj) {
         observers.remove(obj);
+
     }
 
     @Override
@@ -97,7 +93,4 @@ public class MenuScreenState implements ScreenState, Subject {
     public JFrame getFrame() {
         return this.frame;
     }
-
-
 }
-

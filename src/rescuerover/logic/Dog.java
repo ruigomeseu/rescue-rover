@@ -10,7 +10,10 @@ public class Dog extends MapObject {
     }
 
     public void setWithHero() {
-        System.out.println("with hero");
+        this.withHero = true;
+    }
+
+    public void setNotWithHero() {
         this.withHero = true;
     }
 

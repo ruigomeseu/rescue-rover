@@ -1,5 +1,6 @@
 package rescuerover.gui;
 
+import rescuerover.gui.states.WonGameScreenState;
 import rescuerover.logic.Hero;
 
 import javax.swing.*;
@@ -30,7 +31,7 @@ public class GameThread extends Thread implements Runnable {
          * If the hero died, show the
          * death animation
          */
-        if(hero.isAlive()) {
+        if(!hero.isAlive()) {
             hero.getSprite().setLimits(34, 40);
             hero.getSprite().setFrameNumber(34);
             for (int i = 0; i < 6; i++) {
@@ -42,6 +43,10 @@ public class GameThread extends Thread implements Runnable {
                     System.out.println("Exception at Thread Sleep: " + e);
                 }
             }
+        }
+        else if(hero.isAtEnd()){
+            gamePanel.getScreenState().setNextState(WonGameScreenState.getInstance(gamePanel.getScreenState().getFrame()));
+            gamePanel.getScreenState().notifyObservers();
         }
 
     }
