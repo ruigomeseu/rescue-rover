@@ -8,7 +8,7 @@ public class Key extends MapObject {
 
     public Key(int x, int y, int direction, String type) {
         super(x, y, direction);
-        sprite = new Sprite(1, 1, 32, "/sprites/Key.png");
+        sprite = new Sprite(1, 1, 32, "/sprites/key.png");
         this.type = type;
     }
 

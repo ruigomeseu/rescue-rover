@@ -4,7 +4,7 @@ import javax.sound.sampled.*;
 import java.io.IOException;
 import java.net.URL;
 
-public class Hero extends MapObject implements Movable {
+public class Hero extends MapObject implements Visitable {
 
     private Map map;
     private boolean hasDog;
@@ -262,5 +262,14 @@ public class Hero extends MapObject implements Movable {
 
     public Key getKey() {
         return key;
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
+    }
+
+    public void kill() {
+        this.alive=false;
     }
 }

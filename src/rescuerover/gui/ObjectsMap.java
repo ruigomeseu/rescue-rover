@@ -1,17 +1,14 @@
 package rescuerover.gui;
 
-import com.sun.corba.se.impl.orbutil.graph.Graph;
 import rescuerover.logic.*;
-import rescuerover.logic.Robot;
 
 import java.awt.*;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class ObjectsMap {
     private Dimension tileDimension;
     private ArrayList<MapObject> objects;
-    private MapObject hero;
+    private Hero hero;
     private boolean lastStep;
 
     public ObjectsMap(ArrayList<MapObject> objects, Dimension tileDimension) {
@@ -31,7 +28,7 @@ public class ObjectsMap {
                     || obj.getX() >= Math.abs(heroPosition.getX() - Constants.VISIBLE_TILES / 2)) {
 
                 if (obj instanceof Hero) {
-                    hero = obj;
+                    hero = (Hero) obj;
                     long offsetIntegerX = (long) hero.getX();
                     double offsetDecimalX = hero.getOffsetX() - offsetIntegerX;
 
@@ -52,6 +49,14 @@ public class ObjectsMap {
                     }
                 } else if (obj instanceof StationaryRobot) {
                     drawStationaryRobots(g, obj, hero);
+                    obj.step();
+                    for(Bullet bullet : ((StationaryRobot) obj).getBullets()) {
+                        drawStationaryRobots(g, bullet, hero);
+                        bullet.step();
+                        if(bullet.getX() == hero.getX() && bullet.getY() == hero.getY()) {
+                            hero.accept(bullet);
+                        }
+                    }
                 }
                 else if(obj instanceof Dog){
                     if(! (((Dog) obj).getWithHero())){

@@ -33,7 +33,6 @@ public class MovementKeyListener implements KeyListener {
 
     private void moveHero(int code) {
         if (!hero.isMoving()) {
-            System.out.println("Hero MOVE!!");
             switch (code) {
                 case KeyEvent.VK_W:
                 case KeyEvent.VK_UP:
