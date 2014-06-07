@@ -12,7 +12,6 @@ public class WonGameKeyListener implements KeyListener {
 
     public WonGameKeyListener(WonGamePanel wonGamePanel) {
         this.panel = wonGamePanel;
-
     }
 
     @Override
@@ -36,11 +35,15 @@ public class WonGameKeyListener implements KeyListener {
                 break;
             case KeyEvent.VK_ENTER:
                 if (panel.image == 1) {
-
+                    panel.wonGameScreenState.setNextState(MenuScreenState.getInstance(panel.wonGameScreenState.getFrame()));
+                    panel.wonGameScreenState.notifyObservers();
                 } else if (panel.image == 2) {
                     panel.wonGameScreenState.setNextState(MenuScreenState.getInstance(panel.wonGameScreenState.getFrame()));
                     panel.wonGameScreenState.notifyObservers();
                 }
+                break;
+            default:
+                break;
 
         }
     }

@@ -1,5 +1,6 @@
 package rescuerover.gui;
 
+import rescuerover.gui.states.LoseGameScreenState;
 import rescuerover.gui.states.WonGameScreenState;
 import rescuerover.logic.Hero;
 
@@ -43,6 +44,8 @@ public class GameThread extends Thread implements Runnable {
                     System.out.println("Exception at Thread Sleep: " + e);
                 }
             }
+            gamePanel.getScreenState().setNextState(LoseGameScreenState.getInstance(gamePanel.getScreenState().getFrame()));
+            gamePanel.getScreenState().notifyObservers();
         }
         else if(hero.isAtEnd()){
             gamePanel.getScreenState().setNextState(WonGameScreenState.getInstance(gamePanel.getScreenState().getFrame()));

@@ -10,12 +10,14 @@ public class ObjectsMap {
     private ArrayList<MapObject> objects;
     private Hero hero;
     private boolean lastStep;
+    private TileMap tileMap;
 
-    public ObjectsMap(ArrayList<MapObject> objects, Dimension tileDimension) {
+    public ObjectsMap(ArrayList<MapObject> objects, Dimension tileDimension, TileMap tileMap) {
         this.objects = objects;
         this.tileDimension = tileDimension;
         this.hero = null;
         this.lastStep = false;
+        this.tileMap = tileMap;
     }
 
     public ArrayList<MapObject> getObjects() {
@@ -48,29 +50,37 @@ public class ObjectsMap {
                         lastStep = false;
                     }
                 } else if (obj instanceof StationaryRobot) {
-                    drawStationaryRobots(g, obj, hero);
+                    drawStationary(g, obj, hero);
                     obj.step();
+                    ArrayList<Bullet> bulletsToRemove = new ArrayList<Bullet>();
                     for(Bullet bullet : ((StationaryRobot) obj).getBullets()) {
-                        drawStationaryRobots(g, bullet, hero);
+                        drawStationary(g, bullet, hero);
                         bullet.step();
-                        if(bullet.getX() == hero.getX() && bullet.getY() == hero.getY()) {
+                        if(tileMap.isTileUnpassable(bullet.getX(),bullet.getY())) {
+                            bulletsToRemove.add(bullet);
+                        }
+                        else if(bullet.getX() == hero.getX() && bullet.getY() == hero.getY()) {
                             hero.accept(bullet);
                         }
                     }
+                    for(Bullet bullet: bulletsToRemove) {
+                        ((StationaryRobot) obj).getBullets().remove(bullet);
+                    }
+                    bulletsToRemove.clear();
                 }
                 else if(obj instanceof Dog){
                     if(! (((Dog) obj).getWithHero())){
-                        drawStationaryRobots(g, obj, hero);
+                        drawStationary(g, obj, hero);
                     }
                 }
                 else if(obj instanceof Key) {
                     if(! ((Key) obj).getWithHero()) {
-                        drawStationaryRobots(g, obj, hero);
+                        drawStationary(g, obj, hero);
                     }
                 }
                 else if(obj instanceof Gate) {
                     if(! ((Gate) obj).getActive()) {
-                        drawStationaryRobots(g, obj, hero);
+                        drawStationary(g, obj, hero);
                     }
                 }
 
@@ -82,7 +92,7 @@ public class ObjectsMap {
 
 
 
-    public void drawStationaryRobots(Graphics g, MapObject obj, MapObject hero) {
+    public void drawStationary(Graphics g, MapObject obj, MapObject hero) {
         long offsetIntegerX = (long) hero.getX();
         double offsetDecimalX = hero.getOffsetX() - offsetIntegerX;
 

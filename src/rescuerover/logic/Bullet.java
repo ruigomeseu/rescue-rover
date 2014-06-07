@@ -5,6 +5,23 @@ public class Bullet extends MapObject implements Visitor {
     public Bullet(int x, int y, int direction) {
         super(x, y, direction);
         sprite = new Sprite(4, 1, 32, "/sprites/bullet.png");
+        switch (direction) {
+            case Constants.UP:
+                sprite.setFrameNumber(3);
+                break;
+            case Constants.LEFT:
+                sprite.setFrameNumber(1);
+                break;
+            case Constants.DOWN:
+                sprite.setFrameNumber(2);
+                break;
+            case Constants.RIGHT:
+                sprite.setFrameNumber(0);
+                break;
+            default:
+                break;
+
+        };
 
     }
 

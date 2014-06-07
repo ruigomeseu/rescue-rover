@@ -17,7 +17,7 @@ public class Map {
 	
 	public Map(TileMap tileMap) {
         this.tileMap = tileMap;
-        this.objectsMap = new ObjectsMap(objects, tileMap.getTileDimension());
+        this.objectsMap = new ObjectsMap(objects, tileMap.getTileDimension(), tileMap);
 
 	}
 	

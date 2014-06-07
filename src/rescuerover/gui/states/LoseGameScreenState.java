@@ -1,7 +1,7 @@
 package rescuerover.gui.states;
 
-import rescuerover.gui.MenuPanel;
-import rescuerover.gui.WonGamePanel;
+
+import rescuerover.gui.LoseGamePanel;
 import rescuerover.logic.Observer;
 import rescuerover.logic.ScreenState;
 import rescuerover.logic.Subject;
@@ -13,8 +13,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 
-
-public class WonGameScreenState implements ScreenState, Subject {
+public class LoseGameScreenState implements ScreenState, Subject {
 
     JPanel panel;
     JFrame frame;
@@ -22,11 +21,11 @@ public class WonGameScreenState implements ScreenState, Subject {
     ScreenState nextState;
     Clip clip;
 
-    private static WonGameScreenState instance = null;
+    private static LoseGameScreenState instance = null;
 
-    protected WonGameScreenState(JFrame frame) {
+    protected LoseGameScreenState(JFrame frame) {
         this.frame = frame;
-        panel = new WonGamePanel(this);
+        panel = new LoseGamePanel(this);
         panel.setLayout(new GridBagLayout());
 
         panel.setVisible(false);
@@ -45,12 +44,13 @@ public class WonGameScreenState implements ScreenState, Subject {
         frame.repaint();
     }
 
-    public static WonGameScreenState getInstance(JFrame frame) {
+    public static LoseGameScreenState getInstance(JFrame frame) {
         if (instance == null) {
-            instance = new WonGameScreenState(frame);
+            instance = new LoseGameScreenState(frame);
         }
         return instance;
     }
+
     @Override
     public void draw(Graphics g) {
 
@@ -80,7 +80,6 @@ public class WonGameScreenState implements ScreenState, Subject {
     @Override
     public void unregister(Observer obj) {
         observers.remove(obj);
-
     }
 
     @Override

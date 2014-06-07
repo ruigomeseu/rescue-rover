@@ -45,6 +45,8 @@ public class ScreenStateManager implements Observer {
         MenuScreenState menu = MenuScreenState.getInstance(frame);
         GameScreenState game = GameScreenState.getInstance(frame);
         WonGameScreenState won = WonGameScreenState.getInstance(frame);
+        LoseGameScreenState lost = LoseGameScreenState.getInstance(frame);
+        lost.register(this);
         game.register(this);
         won.register(this);
         menu.register(this);
@@ -55,7 +57,7 @@ public class ScreenStateManager implements Observer {
     }
 
     public void draw() {
-     //   currentState.draw(frame);
+
     }
 
     @Override

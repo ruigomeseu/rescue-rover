@@ -10,13 +10,30 @@ public class StationaryRobot extends Robot {
     public StationaryRobot(int x, int y, int direction) {
         super(x, y, direction);
         sprite = new Sprite(12, 4, 32, "/sprites/robot.png");
+        switch (direction) {
+            case Constants.UP:
+                sprite.setFrameNumber(9);
+                break;
+            case Constants.LEFT:
+                sprite.setFrameNumber(3);
+                break;
+            case Constants.DOWN:
+                sprite.setFrameNumber(0);
+                break;
+            case Constants.RIGHT:
+                sprite.setFrameNumber(6);
+                break;
+            default:
+                break;
+
+        };
         this.time = 0;
     }
 
     public void step() {
         time += 50;
 
-        if(time == 5000){
+        if(time == 3000){
             fire();
             time = 0;
         }
