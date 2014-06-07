@@ -27,6 +27,7 @@ This was originally developed by [Rui Gomes](http://www.github.com/ruigomeseu) a
 
 ####Sprites
 * Crono, from Chrono Trigger by Square - Downloaded at [The Spriters Resource](http://www.spriters-resource.com/snes/chronotrigger/sheet/2514/)
+* Rajawali's Robots - Downloaded at [RPGMakerVX](http://www.rpgmakervx.net/index.php?showtopic=54606)
 * Stairs, from Pokemon Fire Red by Nintendo - Downloaded at [The Spriters Resource](http://www.spriters-resource.com/game_boy_advance/pokemonfireredleafgreen/sheet/23724/)
 
 ####Sound Effects
@@ -34,4 +35,4 @@ This was originally developed by [Rui Gomes](http://www.github.com/ruigomeseu) a
 * Key Picked Up: Pokemon(R/B/Y) Item Found
 * Level Completed: Pokemon(R/B/Y) Trainer Defeated
 
-Downloaded at [VGMusic.com](http://www.vgmusic.com/music/console/nintendo/gameboy/)
+All the sound effects were downloaded at [VGMusic.com](http://www.vgmusic.com/music/console/nintendo/gameboy/)
