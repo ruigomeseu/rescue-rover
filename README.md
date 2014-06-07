@@ -30,3 +30,8 @@ This was originally developed by [Rui Gomes](http://www.github.com/ruigomeseu) a
 * Stairs, from Pokemon Fire Red by Nintendo - Downloaded at [The Spriters Resource](http://www.spriters-resource.com/game_boy_advance/pokemonfireredleafgreen/sheet/23724/)
 
 ####Sound Effects
+* Background Music: Pokémon(R/B/Y) Oak's Theme
+* Key Picked Up: Pokemon(R/B/Y) Item Found
+* Level Completed: Pokemon(R/B/Y) Trainer Defeated
+
+Downloaded at [VGMusic.com](http://www.vgmusic.com/music/console/nintendo/gameboy/)
