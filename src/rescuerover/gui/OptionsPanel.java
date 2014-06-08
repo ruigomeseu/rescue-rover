@@ -1,5 +1,6 @@
 package rescuerover.gui;
 
+import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 import rescuerover.gui.states.MenuScreenState;
 import rescuerover.gui.states.OptionsScreenState;
 import rescuerover.logic.Constants;
@@ -154,10 +155,16 @@ public class OptionsPanel extends JPanel {
 
                 if (item == "800x600") {
                     optionsPanel.optionsScreenState.getFrame().setSize(new Dimension(800, 600));
+                    Constants.WIDTH = 800;
+                    Constants.HEIGHT = 600;
                 } else if (item == "1024x768") {
                     optionsPanel.optionsScreenState.getFrame().setSize(new Dimension(1024, 768));
+                    Constants.WIDTH = 1024;
+                    Constants.HEIGHT = 768;
                 } else if (item == "1280x1024") {
                     optionsPanel.optionsScreenState.getFrame().setSize(new Dimension(1280, 1024));
+                    Constants.WIDTH = 1280;
+                    Constants.HEIGHT = 1024;
                 }
             }
         }
