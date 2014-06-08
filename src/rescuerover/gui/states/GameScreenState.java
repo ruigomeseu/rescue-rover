@@ -57,7 +57,6 @@ public class GameScreenState implements ScreenState, Subject {
         frame.add(gamePanel, gbc);
 
         tileSet = new TileSet(32, 25, 18, "/tileset.png");
-        // loads tiles -> no blocks
         tileSet.loadTile();
         tileSet.loadTilesProperties("/tileproperties", ",");
 

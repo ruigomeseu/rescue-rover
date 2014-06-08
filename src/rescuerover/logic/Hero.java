@@ -30,8 +30,8 @@ public class Hero extends MapObject implements Visitable {
     public void move(int direction) {
         switch (direction) {
             case Constants.UP:
+                this.direction = Constants.UP;
                 if (map.isValidMove(this.x, this.y - 1)) {
-                    this.direction = Constants.UP;
                     this.moving = true;
                     if (map.isKillingTile(this.x, this.y - 1)) {
                         this.alive = false;
@@ -55,9 +55,9 @@ public class Hero extends MapObject implements Visitable {
                 }
                 break;
             case Constants.RIGHT:
+                this.direction = Constants.RIGHT;
                 if (map.isValidMove(this.x + 1, this.y)) {
                     this.moving = true;
-                    this.direction = Constants.RIGHT;
                     if (map.isKillingTile(this.x + 1, this.y)) {
                         this.alive = false;
                     } else if (map.isDogTile(this.x + 1, this.y)) {
@@ -79,9 +79,9 @@ public class Hero extends MapObject implements Visitable {
 
                 break;
             case Constants.DOWN:
+                this.direction = Constants.DOWN;
                 if (map.isValidMove(this.x, this.y + 1)) {
                     this.moving = true;
-                    this.direction = Constants.DOWN;
                     if (map.isKillingTile(this.x, this.y + 1)) {
                         this.alive = false;
                     } else if (map.isDogTile(this.x, this.y + 1)) {
@@ -102,9 +102,9 @@ public class Hero extends MapObject implements Visitable {
                 }
                 break;
             case Constants.LEFT:
+                this.direction = Constants.LEFT;
                 if (map.isValidMove(this.x - 1, this.y)) {
                     this.moving = true;
-                    this.direction = Constants.LEFT;
                     if (map.isKillingTile(this.x - 1, this.y)) {
                         this.alive = false;
                     } else if (map.isDogTile(this.x - 1, this.y)) {
