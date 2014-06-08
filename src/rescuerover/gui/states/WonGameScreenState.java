@@ -1,6 +1,5 @@
 package rescuerover.gui.states;
 
-import rescuerover.gui.MenuPanel;
 import rescuerover.gui.WonGamePanel;
 import rescuerover.logic.Constants;
 import rescuerover.logic.Observer;
@@ -14,7 +13,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 
-
+/**
+ * The active state after the user wins the game
+ */
 public class WonGameScreenState implements ScreenState, Subject {
 
     JPanel panel;

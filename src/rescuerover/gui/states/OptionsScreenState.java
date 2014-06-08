@@ -10,6 +10,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * The active state for configuring the game options
+ */
 public class OptionsScreenState implements ScreenState, Subject {
 
 

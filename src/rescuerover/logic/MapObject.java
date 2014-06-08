@@ -1,5 +1,8 @@
 package rescuerover.logic;
 
+/**
+ * A base class for all the movable objects
+ */
 public abstract class MapObject extends Position {
 
     protected Sprite sprite;

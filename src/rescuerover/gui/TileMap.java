@@ -11,6 +11,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+/**
+ * Contains the map file and associates it with the corresponding images
+ */
 public class TileMap {
     private TileSet tileSet;
 

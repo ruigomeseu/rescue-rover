@@ -1,5 +1,8 @@
 package rescuerover.logic;
 
+/**
+ * Several widely use constants
+ */
 public abstract class Constants {
 	public static final int UP = 0;
 	public static final int RIGHT = 1;

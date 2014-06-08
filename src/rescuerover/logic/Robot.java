@@ -2,7 +2,7 @@ package rescuerover.logic;
 
 import java.util.ArrayList;
 
-public class Robot extends MapObject implements Movable {
+public class Robot extends MapObject {
 
     private boolean alive;
 
@@ -16,11 +16,6 @@ public class Robot extends MapObject implements Movable {
         super(x, y, direction);
         alive = true;
         bullets = new ArrayList<Bullet>();
-    }
-
-    @Override
-    public void move(int direction) {
-
     }
 
     public void step() {

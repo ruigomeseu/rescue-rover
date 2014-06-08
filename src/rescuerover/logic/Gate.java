@@ -1,6 +1,8 @@
 package rescuerover.logic;
 
-
+/**
+ * The gate that separates the hero from the dog
+ */
 public class Gate extends MapObject {
 
     boolean active = false;

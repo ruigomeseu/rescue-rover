@@ -1,5 +1,8 @@
 package rescuerover.logic;
 
+/**
+ * A robot that fires every 2s
+ */
 public class StationaryRobot extends Robot {
 
     private int framesPerMovement;

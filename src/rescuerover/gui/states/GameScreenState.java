@@ -14,6 +14,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 
+/**
+ * The state that is active when the user is playing
+ */
 public class GameScreenState implements ScreenState, Subject {
 
     private static GameScreenState instance = null;
@@ -43,6 +46,9 @@ public class GameScreenState implements ScreenState, Subject {
         setup();
     }
 
+    /**
+     * Initializes the panels and main game logic
+     */
     public void setup() {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;

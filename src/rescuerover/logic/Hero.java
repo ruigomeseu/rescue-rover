@@ -27,6 +27,12 @@ public class Hero extends MapObject implements Visitable {
         this.hasKey = false;
     }
 
+    /**
+     * Moves the hero according to the direction chosen
+     * Verifies if the movement is valid and sets the sprites
+     * accordingly to the movement.
+     * @param direction Direction to move
+     */
     public void move(int direction) {
         switch (direction) {
             case Constants.UP:
@@ -180,6 +186,11 @@ public class Hero extends MapObject implements Visitable {
         return this.alive;
     }
 
+    /**
+     * Moves the hero 1 step, incrementing
+     * the frame number, thus generating
+     * an animation
+     */
     public void step() {
         if (sprite.incrementFrameNumber()) {
             moving = false;

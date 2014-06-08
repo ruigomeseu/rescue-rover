@@ -5,6 +5,9 @@ import rescuerover.logic.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * Draws all the movable objects that are not part of the map
+ */
 public class ObjectsMap {
     public void setTileDimension(Dimension tileDimension) {
         this.tileDimension = tileDimension;

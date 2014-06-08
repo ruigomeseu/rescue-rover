@@ -1,5 +1,8 @@
 package rescuerover.logic;
 
+/**
+ * The bullet that is fired from the robots
+ */
 public class Bullet extends MapObject implements Visitor {
 
     public Bullet(int x, int y, int direction) {

@@ -14,6 +14,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 
+/**
+ * The active state after the user loses the game
+ */
 public class LoseGameScreenState implements ScreenState, Subject {
 
     JPanel panel;

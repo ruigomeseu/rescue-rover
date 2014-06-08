@@ -16,6 +16,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * The first state to be active, shows all the available
+ * options
+ */
 public class MenuScreenState implements ScreenState, Subject {
 
     JPanel panel;

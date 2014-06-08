@@ -6,6 +6,9 @@ import rescuerover.logic.Hero;
 
 import javax.swing.*;
 
+/**
+ *  The main game thread, making the game run at 20 FPS
+ */
 public class GameThread extends Thread implements Runnable {
 
     private GamePanel gamePanel;

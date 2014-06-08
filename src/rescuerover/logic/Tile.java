@@ -2,6 +2,9 @@ package rescuerover.logic;
 
 import java.awt.image.BufferedImage;
 
+/**
+ * Defines a single map tile
+ */
 public class Tile {
     public static final int NORMAL = 0;
     public static final int UNPASSABLE = 1;

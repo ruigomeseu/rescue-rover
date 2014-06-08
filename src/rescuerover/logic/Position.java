@@ -1,5 +1,8 @@
 package rescuerover.logic;
 
+/**
+ * A default class for all the map objects
+ */
 public class Position {
     protected int x;
     protected int y;

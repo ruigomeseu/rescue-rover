@@ -1,6 +1,9 @@
 package rescuerover.logic;
 
-
+/**
+ * The key used to open the gate
+ * May be a fake key or the real key
+ */
 public class Key extends MapObject {
 
     String type;
