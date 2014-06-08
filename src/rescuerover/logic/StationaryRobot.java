@@ -33,7 +33,7 @@ public class StationaryRobot extends Robot {
     public void step() {
         time += 50;
 
-        if(time == 2500){
+        if(time == 2000){
             fire();
             time = 0;
         }
