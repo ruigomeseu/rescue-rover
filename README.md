@@ -18,7 +18,7 @@ A Java implementation of the classic game Rescue Rover, by id Software. This was
 The State Pattern was used to commute between the Main Menu, the game itself and the various game outcomes (Game Won or Game Lost).
 
 ####Singleton Pattern
-All the implemented states are singletons, meaning that there won't be duplicate JPanels for the same state.
+All the implemented states are singletons, meaning that there won't be duplicated JPanels for the same state.
 
 ####Observer Pattern
 The usage of the Observer Pattern allowed for an easy switch between the different game states. When a state change is requested, the State Manager will be notified and it will correctly interchange the active state.
