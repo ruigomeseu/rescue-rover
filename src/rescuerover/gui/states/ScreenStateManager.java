@@ -38,7 +38,7 @@ public class ScreenStateManager implements Observer {
         JPanel contentPane = new JPanel();
         contentPane.setBorder(null);
         frame.setContentPane(contentPane);
-        frame.getContentPane().setPreferredSize(new Dimension(800, 600));
+        frame.getContentPane().setPreferredSize(new Dimension(600, 600));
         frame.getContentPane().setLayout(new GridBagLayout());
         frame.setResizable(false);
 
