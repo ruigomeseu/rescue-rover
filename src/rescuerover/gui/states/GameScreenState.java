@@ -30,7 +30,7 @@ public class GameScreenState implements ScreenState, Subject {
     TileSet tileSet;
     TileMap tileMap;
     Map map;
-    StationaryRobot robot, robot1, robot2, robot3, robot4;
+    StationaryRobot robot, robot1, robot2, robot3, robot4, robot5, robot6;
     Dog dog;
     Key realKey, fakeKey, fakeKey1;
     Gate gate;
@@ -86,6 +86,8 @@ public class GameScreenState implements ScreenState, Subject {
         robot2 = new StationaryRobot(7, 7, Constants.UP);
         robot3 = new StationaryRobot(12, 11, Constants.LEFT);
         robot4 = new StationaryRobot(5, 7, Constants.DOWN);
+        robot5 = new StationaryRobot(28, 20, Constants.LEFT);
+        robot6 = new StationaryRobot(20, 15, Constants.DOWN);
         dog = new Dog(28, 23, Constants.LEFT);
         realKey = new Key(27, 27, Constants.RIGHT, "real");
         fakeKey = new Key(20, 20, Constants.RIGHT, "fake");
@@ -98,6 +100,8 @@ public class GameScreenState implements ScreenState, Subject {
         map.addMapObject(robot2);
         map.addMapObject(robot3);
         map.addMapObject(robot4);
+        map.addMapObject(robot5);
+        map.addMapObject(robot6);
         map.addMapObject(dog);
         map.addMapObject(realKey);
         map.addMapObject(fakeKey);
