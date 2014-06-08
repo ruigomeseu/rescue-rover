@@ -71,6 +71,12 @@ public class TileMap {
         return this.tileDimension;
     }
 
+    /**
+     * Reads from the defined map file, starting from the
+     * mapStartLine and stores it in the map array
+     * @param mapStartLine First line to read
+     * @param delim The delimiter that separates each tile
+     */
     public void loadMap(int mapStartLine, String delim) {
         InputStream in = getClass().getResourceAsStream(mapFile);
         BufferedReader br = new BufferedReader(new InputStreamReader(in));
@@ -95,6 +101,11 @@ public class TileMap {
         }
     }
 
+    /**
+     * Draws a portion of the map, centered on the hero
+     * If the hero is moving, draws the map accordingly, on increments
+     * @param g Graphics
+     */
     public void draw(Graphics g) {
         int counterx = 0;
         int countery = 0;

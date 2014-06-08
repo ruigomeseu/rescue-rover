@@ -31,6 +31,13 @@ public class ObjectsMap {
         return objects;
     }
 
+    /**
+     * Draws the hero on the center and all objects that are within
+     * visible radius of the hero.
+     *
+     * @param g Graphics
+     * @param heroPosition Hero position for object centering
+     */
     public void draw(Graphics g, Position heroPosition) {
         for (MapObject obj : objects) {
             if (obj.getX() <= Math.abs(heroPosition.getX() + Constants.VISIBLE_TILES / 2)
@@ -97,8 +104,12 @@ public class ObjectsMap {
         }
     }
 
-
-
+    /**
+     * Draw a not moving object
+     * @param g Graphics
+     * @param obj Object to draw
+     * @param hero Hero, for centering purposes
+     */
     public void drawStationary(Graphics g, MapObject obj, MapObject hero) {
         long offsetIntegerX = (long) hero.getX();
         double offsetDecimalX = hero.getOffsetX() - offsetIntegerX;
