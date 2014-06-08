@@ -33,24 +33,43 @@ public class MovementKeyListener implements KeyListener {
 
     private void moveHero(int code) {
         if (!hero.isMoving()) {
-            switch (code) {
-                case KeyEvent.VK_W:
-                case KeyEvent.VK_UP:
-                    hero.move(Constants.UP);
-                    break;
-                case KeyEvent.VK_A:
-                case KeyEvent.VK_LEFT:
-                    hero.move(Constants.LEFT);
-                    break;
-                case KeyEvent.VK_S:
-                case KeyEvent.VK_DOWN:
-                    hero.move(Constants.DOWN);
-                    break;
-                case KeyEvent.VK_D:
-                case KeyEvent.VK_RIGHT:
-                    hero.move(Constants.RIGHT);
-                    break;
+            if(Constants.WASD_KEYS) {
+                switch (code) {
+                    case KeyEvent.VK_W:
+                        hero.move(Constants.UP);
+                        break;
+                    case KeyEvent.VK_A:
+                        hero.move(Constants.LEFT);
+                        break;
+                    case KeyEvent.VK_S:
+                        hero.move(Constants.DOWN);
+                        break;
+                    case KeyEvent.VK_D:
+                        hero.move(Constants.RIGHT);
+                        break;
+                    default:
+                        break;
+                }
             }
+            else {
+                switch (code) {
+                    case KeyEvent.VK_UP:
+                        hero.move(Constants.UP);
+                        break;
+                    case KeyEvent.VK_LEFT:
+                        hero.move(Constants.LEFT);
+                        break;
+                    case KeyEvent.VK_DOWN:
+                        hero.move(Constants.DOWN);
+                        break;
+                    case KeyEvent.VK_RIGHT:
+                        hero.move(Constants.RIGHT);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
         }
     }
 }

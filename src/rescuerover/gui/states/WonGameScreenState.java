@@ -2,6 +2,7 @@ package rescuerover.gui.states;
 
 import rescuerover.gui.MenuPanel;
 import rescuerover.gui.WonGamePanel;
+import rescuerover.logic.Constants;
 import rescuerover.logic.Observer;
 import rescuerover.logic.ScreenState;
 import rescuerover.logic.Subject;
@@ -51,6 +52,7 @@ public class WonGameScreenState implements ScreenState, Subject {
         }
         return instance;
     }
+
     @Override
     public void draw(Graphics g) {
 
@@ -58,7 +60,9 @@ public class WonGameScreenState implements ScreenState, Subject {
 
     @Override
     public void onEnter() {
-        playSound();
+        if (!Constants.MUTED) {
+            playSound();
+        }
         panel.setVisible(true);
         panel.setFocusable(true);
         panel.requestFocus();
@@ -69,7 +73,9 @@ public class WonGameScreenState implements ScreenState, Subject {
     public void onExit() {
         panel.setVisible(false);
         panel.setFocusable(false);
-        clip.stop();
+        if (!Constants.MUTED) {
+            clip.stop();
+        }
     }
 
     @Override
@@ -80,7 +86,6 @@ public class WonGameScreenState implements ScreenState, Subject {
     @Override
     public void unregister(Observer obj) {
         observers.remove(obj);
-
     }
 
     @Override
@@ -90,7 +95,7 @@ public class WonGameScreenState implements ScreenState, Subject {
         }
     }
 
-    public void setNextState(ScreenState state){
+    public void setNextState(ScreenState state) {
         nextState = state;
     }
 

@@ -136,7 +136,9 @@ public class Hero extends MapObject implements Visitable {
                     this.key = (Key) obj;
                     ((Key) obj).setWithHero(true);
                     this.hasKey = true;
-                    playSound();
+                    if(!Constants.MUTED) {
+                        playSound();
+                    }
                 }
             }
         }

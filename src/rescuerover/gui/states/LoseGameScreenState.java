@@ -2,6 +2,7 @@ package rescuerover.gui.states;
 
 
 import rescuerover.gui.LoseGamePanel;
+import rescuerover.logic.Constants;
 import rescuerover.logic.Observer;
 import rescuerover.logic.ScreenState;
 import rescuerover.logic.Subject;
@@ -58,7 +59,9 @@ public class LoseGameScreenState implements ScreenState, Subject {
 
     @Override
     public void onEnter() {
-        playSound();
+        if (!Constants.MUTED) {
+            playSound();
+        }
         panel.setVisible(true);
         panel.setFocusable(true);
         panel.requestFocus();
@@ -69,7 +72,9 @@ public class LoseGameScreenState implements ScreenState, Subject {
     public void onExit() {
         panel.setVisible(false);
         panel.setFocusable(false);
-        clip.stop();
+        if (!Constants.MUTED) {
+            clip.stop();
+        }
     }
 
     @Override
@@ -89,7 +94,7 @@ public class LoseGameScreenState implements ScreenState, Subject {
         }
     }
 
-    public void setNextState(ScreenState state){
+    public void setNextState(ScreenState state) {
         nextState = state;
     }
 

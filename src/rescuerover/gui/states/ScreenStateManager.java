@@ -40,12 +40,15 @@ public class ScreenStateManager implements Observer {
         frame.setContentPane(contentPane);
         frame.getContentPane().setPreferredSize(new Dimension(800, 600));
         frame.getContentPane().setLayout(new GridBagLayout());
+        frame.setResizable(false);
 
 
         MenuScreenState menu = MenuScreenState.getInstance(frame);
+        OptionsScreenState options = OptionsScreenState.getInstance(frame);
         GameScreenState game = GameScreenState.getInstance(frame);
         WonGameScreenState won = WonGameScreenState.getInstance(frame);
         LoseGameScreenState lost = LoseGameScreenState.getInstance(frame);
+        options.register(this);
         lost.register(this);
         game.register(this);
         won.register(this);

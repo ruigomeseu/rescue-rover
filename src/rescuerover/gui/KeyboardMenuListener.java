@@ -1,6 +1,7 @@
 package rescuerover.gui;
 
 import rescuerover.gui.states.GameScreenState;
+import rescuerover.gui.states.OptionsScreenState;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -56,6 +57,13 @@ public class KeyboardMenuListener implements KeyListener {
                     panel.menuScreenState.notifyObservers();
                 } else if (panel.image == 4) {
                     System.exit(0);
+                }
+                else if(panel.image == 3) {
+                    panel.menuScreenState.setNextState(OptionsScreenState.getInstance(panel.menuScreenState.getFrame()));
+                    panel.menuScreenState.notifyObservers();
+                }
+                else if(panel.image == 2) {
+
                 }
 
                 break;

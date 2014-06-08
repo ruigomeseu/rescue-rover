@@ -9,4 +9,7 @@ public abstract class Constants {
     public static final int WIDTH = 600;
     public static final int HEIGHT = 600;
     public static final int VISIBLE_TILES = 11;
+
+    public static boolean MUTED = false;
+    public static boolean WASD_KEYS = true;
 }

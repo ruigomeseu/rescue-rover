@@ -1,5 +1,6 @@
 package rescuerover.gui.states;
 
+import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 import rescuerover.gui.GamePanel;
 import rescuerover.gui.GameThread;
 import rescuerover.gui.MovementKeyListener;
@@ -58,7 +59,7 @@ public class GameScreenState implements ScreenState, Subject {
         tileSet.loadTile();
         tileSet.loadTilesProperties("/tileproperties", ",");
 
-        tileMap = new TileMap(new Dimension(30,30), "/map");
+        tileMap = new TileMap(new Dimension(30, 30), "/map");
         // Adds a tile set to load map
         tileMap.setTileSet(tileSet);
         // Set different position to start showing map
@@ -73,16 +74,16 @@ public class GameScreenState implements ScreenState, Subject {
         map = new Map(tileMap);
 
         hero = new Hero(2, 4, Constants.UP, map);
-        robot = new StationaryRobot(10,10,Constants.RIGHT);
-        robot1 = new StationaryRobot(8,8,Constants.RIGHT);
-        robot2 = new StationaryRobot(7,7,Constants.UP);
-        robot3 = new StationaryRobot(12,11,Constants.LEFT);
-        robot4 = new StationaryRobot(5,7,Constants.DOWN);
-        dog = new Dog(28,23, Constants.LEFT);
-        realKey = new Key(27,27,Constants.RIGHT, "real");
-        fakeKey = new Key(20,20,Constants.RIGHT, "fake");
-        fakeKey1 = new Key(3,22,Constants.RIGHT, "fake");
-        gate = new Gate(24,23,Constants.RIGHT);
+        robot = new StationaryRobot(10, 10, Constants.RIGHT);
+        robot1 = new StationaryRobot(8, 8, Constants.RIGHT);
+        robot2 = new StationaryRobot(7, 7, Constants.UP);
+        robot3 = new StationaryRobot(12, 11, Constants.LEFT);
+        robot4 = new StationaryRobot(5, 7, Constants.DOWN);
+        dog = new Dog(28, 23, Constants.LEFT);
+        realKey = new Key(27, 27, Constants.RIGHT, "real");
+        fakeKey = new Key(20, 20, Constants.RIGHT, "fake");
+        fakeKey1 = new Key(3, 22, Constants.RIGHT, "fake");
+        gate = new Gate(24, 23, Constants.RIGHT);
 
         map.addMapObject(hero);
         map.addMapObject(robot);
@@ -102,7 +103,7 @@ public class GameScreenState implements ScreenState, Subject {
     }
 
     public static GameScreenState getInstance(JFrame frame) {
-        if(instance == null) {
+        if (instance == null) {
             instance = new GameScreenState(frame);
         }
         return instance;
@@ -115,7 +116,9 @@ public class GameScreenState implements ScreenState, Subject {
 
     @Override
     public void onEnter() {
-        playSound();
+        if (!Constants.MUTED) {
+            playSound();
+        }
         gameThread = new GameThread(gamePanel, hero);
         gameThread.start();
         panel.setVisible(true);
@@ -132,7 +135,10 @@ public class GameScreenState implements ScreenState, Subject {
         gamePanel.requestFocus(false);
         gamePanel.setVisible(false);
         resetGameState();
-        clip.stop();
+        if (!Constants.MUTED) {
+            clip.stop();
+        }
+
     }
 
     private void resetGameState() {
@@ -162,12 +168,11 @@ public class GameScreenState implements ScreenState, Subject {
         return this.frame;
     }
 
-    public void setNextState(ScreenState state){
+    public void setNextState(ScreenState state) {
         nextState = state;
     }
 
-    private void playSound()
-    {
+    private void playSound() {
         try {
             // Open an audio input stream.
             URL url = this.getClass().getClassLoader().getResource("sounds/back.mid");
