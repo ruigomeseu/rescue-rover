@@ -34,5 +34,6 @@ This was originally developed by [Rui Gomes](http://www.github.com/ruigomeseu) a
 * Background Music: Pokémon(R/B/Y) Oak's Theme
 * Key Picked Up: Pokemon(R/B/Y) Item Found
 * Level Completed: Pokemon(R/B/Y) Trainer Defeated
+* Game Over: Megaman Battle Network 2 - Sad
 
 All the sound effects were downloaded at [VGMusic.com](http://www.vgmusic.com/music/console/nintendo/gameboy/)
