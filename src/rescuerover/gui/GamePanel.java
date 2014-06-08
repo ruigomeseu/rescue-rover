@@ -20,8 +20,11 @@ public class GamePanel extends JPanel {
     }
 
     protected void paintComponent(Graphics g) {
-        this.map.tileMap.draw(g);
-        this.map.objectsMap.draw(g, this.map.heroPosition());
+        if(this.map != null){
+            this.map.tileMap.draw(g);
+            this.map.objectsMap.draw(g, this.map.heroPosition());
+        }
+
     }
 
     public GameScreenState getScreenState() {
