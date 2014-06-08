@@ -47,12 +47,14 @@ public class GameScreenState implements ScreenState, Subject {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.weightx = 1;
+        gbc.weighty = 1;
+        gbc.fill = GridBagConstraints.BOTH;
         gbc.anchor = GridBagConstraints.CENTER;
 
         gamePanel = new GamePanel(new Dimension(Constants.WIDTH, Constants.HEIGHT), this);
 
-        panel.add(gamePanel, gbc);
+        frame.add(gamePanel, gbc);
 
         tileSet = new TileSet(32, 25, 18, "/tileset.png");
         // loads tiles -> no blocks
@@ -119,6 +121,10 @@ public class GameScreenState implements ScreenState, Subject {
         if (!Constants.MUTED) {
             playSound();
         }
+        tileMap.setTileDimension(new Dimension(Constants.HEIGHT / Constants.VISIBLE_TILES, Constants.HEIGHT / Constants.VISIBLE_TILES));
+        map.setTileDimension(tileMap.getTileDimension());
+        frame.setPreferredSize(new Dimension(Constants.HEIGHT, Constants.HEIGHT));
+        gamePanel.setPreferredSize(new Dimension(Constants.HEIGHT, Constants.HEIGHT));
         gameThread = new GameThread(gamePanel, hero);
         gameThread.start();
         panel.setVisible(true);

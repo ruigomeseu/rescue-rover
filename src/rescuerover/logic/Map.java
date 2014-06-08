@@ -18,8 +18,11 @@ public class Map {
 	public Map(TileMap tileMap) {
         this.tileMap = tileMap;
         this.objectsMap = new ObjectsMap(objects, tileMap.getTileDimension(), tileMap);
-
 	}
+
+    public void setTileDimension(Dimension tileDimension) {
+        this.objectsMap.setTileDimension(tileDimension);
+    }
 	
 	public void addMapObject(MapObject object) {
 		objects.add(object);

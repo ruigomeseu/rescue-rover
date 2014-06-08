@@ -6,6 +6,10 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class ObjectsMap {
+    public void setTileDimension(Dimension tileDimension) {
+        this.tileDimension = tileDimension;
+    }
+
     private Dimension tileDimension;
     private ArrayList<MapObject> objects;
     private Hero hero;
