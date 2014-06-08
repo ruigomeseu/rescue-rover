@@ -108,7 +108,7 @@ public class LoseGameScreenState implements ScreenState, Subject {
         try {
             // Open an audio input stream.
 
-            url = this.getClass().getClassLoader().getResource("sounds/win.mid");
+            url = this.getClass().getClassLoader().getResource("sounds/lose.mid");
 
             AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
             // Get a sound clip resource.

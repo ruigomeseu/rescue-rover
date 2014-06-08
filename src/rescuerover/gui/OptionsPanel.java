@@ -36,7 +36,7 @@ public class OptionsPanel extends JPanel {
         goBackButton = new JButton("Go Back");
         goBackButton.addActionListener(new goBackListener(this));
 
-        String[] resolutionTypes = {"600x600", "1024x1024", "1280x1280"};
+        String[] resolutionTypes = {"600x600", "800x800", "1024x1024", "1280x1280"};
         resolutions = new JComboBox(resolutionTypes);
         resolutions.setSelectedIndex(0);
         resolutions.addItemListener(new resolutionChangeListener(this));
@@ -157,6 +157,10 @@ public class OptionsPanel extends JPanel {
                     optionsPanel.optionsScreenState.getFrame().setSize(new Dimension(600, 600));
                     Constants.WIDTH = 600;
                     Constants.HEIGHT = 600;
+                } else if (item == "800x800") {
+                    optionsPanel.optionsScreenState.getFrame().setSize(new Dimension(800, 800));
+                    Constants.WIDTH = 800;
+                    Constants.HEIGHT = 800;
                 } else if (item == "1024x1024") {
                     optionsPanel.optionsScreenState.getFrame().setSize(new Dimension(1024, 1024));
                     Constants.WIDTH = 1024;
