@@ -1,6 +1,5 @@
 package rescuerover.logic;
 
-import javafx.util.Pair;
 import rescuerover.gui.ObjectsMap;
 import rescuerover.gui.TileMap;
 
