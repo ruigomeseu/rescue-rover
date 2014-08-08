@@ -3,15 +3,6 @@ Rescue Rover
 
 A Java implementation of the classic game Rescue Rover, by id Software. This was an academic project for the [Object Oriented Programming Laboratory](https://sigarra.up.pt/feup/en/UCURR_GERAL.FICHA_UC_VIEW?pv_ocorrencia_id=333122) class at FEUP.
 
-##Screenshots
-
-####Main Interface
-
-![Main Interface](http://ruigomes.me/uploads/rescue-rover-screenshot.png)
-
-####Gameplay
-![Gameplay](http://ruigomes.me/uploads/rescue-rover-animated-screenshot.gif)
-
 ##Design Patterns Used
 
 ####State Pattern
